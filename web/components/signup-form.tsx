@@ -16,9 +16,37 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { api_signup } from "@/lib/strings";
+import useSWR from "swr";
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+    const { data, error, isLoading, mutate } = useSWR(
+    "http://localhost:3001/signup/api",
+    fetcher
+  );
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignup = async (e: React.FormEvent) => {
+  e.preventDefault(); 
+  try {
+      await axios.post("http://localhost:3001/signup/api", {
+      name,
+      email,
+      password,
+    });
+    console.log("Pendaftaran berhasil!");
+    
+  } catch (error) {
+    console.error("Pendaftaran gagal:");
+  }
+};
+
 return (
     <Card {...props}>
       <CardHeader>
@@ -30,7 +58,7 @@ return (
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form >
+        <form onSubmit={handleSignup}>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="name">Full Name</FieldLabel>
@@ -38,8 +66,8 @@ return (
                 id="name"
                 type="text"
                 placeholder="Deni Himawan"
-                // value={name}
-                // onChange={(e) => setName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </Field>
@@ -49,8 +77,8 @@ return (
                 id="email"
                 type="email"
                 placeholder="cukurukuk@example.com"
-                // value={email}
-                // onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
               <FieldDescription>
@@ -63,8 +91,8 @@ return (
               <Input 
               id="password" 
               type="password" 
-            //   value={password}
-            //   onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required />
               <FieldDescription>
                 Must be at least 8 characters long.
@@ -79,7 +107,8 @@ return (
             </Field>
             <FieldGroup>
               <Field>
-                <Button type="submit">Create Account</Button>
+                <Button type="submit" variant="outline" >Create Account</Button>
+                
                 <Button variant="outline" type="button">
                   Sign up with Google
                 </Button>
