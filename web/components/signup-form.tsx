@@ -20,13 +20,13 @@ import axios from "axios";
 import { api_signup } from "@/lib/strings";
 import useSWR from "swr";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-    const { data, error, isLoading, mutate } = useSWR(
-    "http://localhost:3001/signup/api",
-    fetcher
-  );
+//     const { data, error, isLoading, mutate } = useSWR(
+//     "http://localhost:3001/signup/api",
+//     fetcher
+//   );
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -44,8 +44,6 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     
   } catch (error) {
     console.error();
-  }finally{
-    mutate();
   }
 };
 
@@ -67,7 +65,7 @@ return (
               <Input
                 id="name"
                 type="text"
-                placeholder="Deni Himawan"
+                placeholder="Dehendy"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
