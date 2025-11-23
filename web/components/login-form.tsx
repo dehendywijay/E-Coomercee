@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -10,10 +12,30 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import axios from "axios"
+import { useState } from "react"
 
-export function LoginForm() {
+export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
+
+  const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault(); 
+  try {
+      const res = await axios.post("http://localhost:3001/api/login", {
+      email,
+      password,
+    });
+    console.log(res.data.message);
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
   return (
-    <Card className="w-full max-w-sm">
+    
+    <Card className="w-full max-w-sm" {...props}>
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
         <CardDescription>
@@ -24,7 +46,7 @@ export function LoginForm() {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -32,6 +54,8 @@ export function LoginForm() {
                 id="email"
                 type="email"
                 placeholder="m@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -45,19 +69,28 @@ export function LoginForm() {
                   Forgot your password?
                 </a>
               </div>
-              <Input id="password" type="password" required />
+              <Input id="password" 
+              type="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required />
+            </div>
+            <div className="flex-col gap-2">
+                    <a >
+              <Button type="submit" variant="outline" className="w-full">
+                Login
+              </Button>
+              </a>
+              <Button variant="outline" className="w-full">
+                Login with Google
+              </Button>
             </div>
           </div>
         </form>
       </CardContent>
-      <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
-      </CardFooter>
+      {/* <CardFooter className="flex-col gap-2">
+        
+      </CardFooter> */}
     </Card>
   )
 }

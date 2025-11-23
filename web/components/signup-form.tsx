@@ -109,7 +109,7 @@ return (
               <Field>
                 <Button type="submit" variant="outline" >Create Account</Button>
                 
-                <Button variant="outline" type="button">
+                <Button variant="outline" type="submit">
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">

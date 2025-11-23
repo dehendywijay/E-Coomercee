@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: Request) {
+export async function POST (req: Request) {
     const data = await req.json();
-    const nama = data.name;
     const password = data.password;
     const email = data.email;
+    
 
     const check = await prisma.user.findFirst({
         where : {
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
     if (check) {
         return NextResponse.json(
-        { message: "Login Berhasil)", status: false })
+        { message: "Login Berhasil", status: true })
     }else{
         return NextResponse.json(
         { message: "Login Gagal", status: false })
