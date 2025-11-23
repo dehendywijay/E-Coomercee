@@ -35,15 +35,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const handleSignup = async (e: React.FormEvent) => {
   e.preventDefault(); 
   try {
-      await axios.post("http://localhost:3001/signup/api", {
+      const res = await axios.post("http://localhost:3001/signup/api", {
       name,
       email,
       password,
     });
-    console.log("Pendaftaran berhasil!");
+    console.log(res.data.message);
     
   } catch (error) {
-    console.error("Pendaftaran gagal:");
+    console.error();
+  }finally{
+    mutate();
   }
 };
 

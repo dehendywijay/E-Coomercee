@@ -20,10 +20,13 @@ export async function POST(req: Request) {
     })
 
     if (check) {
-        return NextResponse.json(
-        { message: "Data Tidak berhasil disimpan(Email Sudah Terdaftar)", status: false })
+        const res = NextResponse.json(
+        { message: "Data Tidak berhasil disimpan(Email Sudah Terdaftar)", status: false },
+        { status: 200 }
+        );
+        res.headers.set("Access-Control-Allow-Origin", "*");
+        return res;
     }
-
     await prisma.user.create({
         data : {
             name : nama,
@@ -32,8 +35,18 @@ export async function POST(req: Request) {
         }
     })
 
-    return NextResponse.json({
-        message: "Data berhasil disimpan", 
-        status: true 
-        });
+    const res = NextResponse.json(
+        { message: "Data berhasil disimpan", status: true },
+        { status: 200 }
+        );
+        res.headers.set("Access-Control-Allow-Origin", "*");
+        return res;
+    }
+
+export async function OPTIONS() {
+  const res = new NextResponse(null, { status: 204 });
+  res.headers.set("Access-Control-Allow-Origin", "*");
+  res.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.headers.set("Access-Control-Allow-Headers", "Content-Type");
+  return res;
 }
