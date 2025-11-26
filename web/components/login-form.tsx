@@ -47,45 +47,47 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleLogin}>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
+    <section className="flex flex-col gap-6">
+        <div className="grid gap-2"> 
+            <Label htmlFor="email">Email</Label>
+            <Input
                 id="email"
                 type="email"
                 placeholder="m@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
+            />
+        </div>
+        <div className="grid gap-2"> 
+            <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
                 <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    href="#"
+                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                 >
-                  Forgot your password?
+                    Forgot your password?
                 </a>
-              </div>
-              <Input id="password" 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required />
             </div>
-            <div className="flex-col gap-2">
-                    <a >
-              <Button type="submit" variant="outline" className="w-full">
-                Login
-              </Button>
-              </a>
-              <Button variant="outline" className="w-full">
+            <Input 
+                id="password" 
+                type="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required 
+            />
+        </div>
+        <section className="flex-col gap-2"> {/* Diganti menjadi section */}
+            <a >
+                <Button type="submit" variant="outline" className="w-full">
+                    Login
+                </Button>
+            </a>
+            <Button variant="outline" className="w-full">
                 Login with Google
-              </Button>
-            </div>
-          </div>
+            </Button>
+        </section>
+    </section>
         </form>
       </CardContent>
       {/* <CardFooter className="flex-col gap-2">
