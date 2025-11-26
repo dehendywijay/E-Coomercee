@@ -6,7 +6,6 @@ import {
   CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -14,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from "axios"
 import { useState } from "react"
+import { toast, Toaster } from "sonner";
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [email, setEmail] = useState("");
@@ -28,7 +28,9 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       password,
     });
     console.log(res.data.message);
-    
+    if (res) {
+      toast.success(res.data.message);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -88,11 +90,13 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
             </Button>
         </section>
     </section>
+    
         </form>
       </CardContent>
       {/* <CardFooter className="flex-col gap-2">
         
       </CardFooter> */}
+       
     </Card>
   )
 }

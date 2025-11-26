@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import { api_signup } from "@/lib/strings";
-import useSWR from "swr";
+
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
