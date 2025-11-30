@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import { toast } from "sonner";
 
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -34,12 +35,15 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const handleSignup = async (e: React.FormEvent) => {
   e.preventDefault(); 
   try {
-      const res = await axios.post("http://localhost:3001/signup/api", {
+      const res = await axios.post("http://localhost:3001/api/signup", {
       name,
       email,
       password,
     });
     console.log(res.data.message);
+    if (res) {
+      toast.success(res.data.message);
+    }
     
   } catch (error) {
     console.error();
