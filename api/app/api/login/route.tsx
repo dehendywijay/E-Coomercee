@@ -35,7 +35,7 @@ export async function POST (req: Request) {
 
         if (!isPasswordMatch) {
             return NextResponse.json({
-                message: "Email ataur Password salah.",
+                message: "Email atau Password salah.",
                 status: false
             })
         }
