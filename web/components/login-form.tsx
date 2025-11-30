@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from "axios"
 import { useState } from "react"
-import { toast, Toaster } from "sonner";
+import { toast} from "sonner";
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [email, setEmail] = useState("");
@@ -30,6 +30,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
     console.log(res.data.message);
     if (res) {
       toast.success(res.data.message);
+      
     }
   } catch (error) {
     console.log(error);
