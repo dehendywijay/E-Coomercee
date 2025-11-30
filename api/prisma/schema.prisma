@@ -14,9 +14,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user{
+model User{
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String
   password  String
+
+  store     Store?
 }
+
+model Product {
+  id                String   @id @default(cuid())
+  name              String
+  imageSrc          String
+  currentPrice      Float
+  originalPrice     Float?
+  discountPercentage Float?
+  rating            Float
+  salesCount        String
+  bonusText         String?
+  location          String
+  isOfficialStore   Boolean   @default(false)
+
+  storeId           String
+  store             Store     @relation(fields: [storeId], references: [id])
+}
+
+model Store {
+  id          String   @id @default(cuid())
+  name        String
+  location    String?
+  isOfficial  Boolean  @default(false)
+
+  userId      Int      @unique
+  user        User     @relation(fields: [userId], references: [id])
+
+  products    Product[]
+}
+
+
+
