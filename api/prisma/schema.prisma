@@ -20,7 +20,32 @@ model User{
   name      String
   password  String
 
+  profile   Profile?
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  
+  bio       String?  
+  phone     String?  
+  address   String? 
+  birthDate DateTime? 
+  
+  userId    Int      @unique 
+  
+  user      User     @relation(fields: [userId], references: [id])
   store     Store?
+}
+
+model Store {
+  id          String   @id @default(cuid())
+  name        String
+  location    String?
+  isOfficial  Boolean  @default(false)
+
+  userId      Int      @unique
+  user        Profile     @relation(fields: [userId], references: [id])
+  products    Product[]
 }
 
 model Product {
@@ -40,17 +65,7 @@ model Product {
   store             Store     @relation(fields: [storeId], references: [id])
 }
 
-model Store {
-  id          String   @id @default(cuid())
-  name        String
-  location    String?
-  isOfficial  Boolean  @default(false)
 
-  userId      Int      @unique
-  user        User     @relation(fields: [userId], references: [id])
-
-  products    Product[]
-}
 
 
 
