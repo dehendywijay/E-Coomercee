@@ -12,13 +12,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from "axios"
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { toast} from "sonner";
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
   e.preventDefault(); 
@@ -28,9 +29,11 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       password,
     });
     console.log(res.data.message);
-    if (res) {
+    if (res.data.status === true) {
       toast.success(res.data.message);
-      
+      router.push("/home");
+    }else {
+      toast.success(res.data.message);
     }
   } catch (error) {
     console.log(error);
