@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { Input } from './ui/input'
-import { AlarmCheckIcon, Bell, Mail, Menu, Search, ShoppingCart, User } from 'lucide-react';
+import {  Bell, Mail, Menu, Search, ShoppingCart, User } from 'lucide-react';
 import { Button } from './ui/button';
-import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaCarousel } from './ui/embla';
+import { ProductCard } from './ui/productcard';
 
 
 export function HomeForm(){
