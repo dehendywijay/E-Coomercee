@@ -25,7 +25,6 @@ model User{
 
 model Profile {
   id        Int      @id @default(autoincrement())
-  
   bio       String?  
   phone     String?  
   address   String? 
