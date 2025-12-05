@@ -47,7 +47,14 @@ export async function POST (req: Request) {
         const refreshToken = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, {
             expiresIn: '1d'
         });
-
+        
+        await prisma.user.update({
+            where:{
+                id : user.id
+            },data:{
+                refreshToken : refreshToken
+            }
+        });
         const res = NextResponse.json({
             message: "Login berhasil",
             status: true,
