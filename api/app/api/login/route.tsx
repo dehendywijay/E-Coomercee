@@ -47,7 +47,7 @@ export async function POST (req: Request) {
         const refreshToken = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, {
             expiresIn: '1d'
         });
-        
+
         await prisma.user.update({
             where:{
                 id : user.id
@@ -59,11 +59,12 @@ export async function POST (req: Request) {
             message: "Login berhasil",
             status: true,
             user: { id: user.id, email: user.email },
-            token: token
+            token: accesToken
         });
 
-        res.cookies.set("token", token, {
+        res.cookies.set("refreshToken", refreshToken, {
             httpOnly: true,
+            maxAge: 24 * 60 * 60,
             secure: true,
         });
 
