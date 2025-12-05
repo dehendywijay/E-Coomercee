@@ -44,7 +44,9 @@ export async function POST (req: Request) {
         const accesToken = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, {
             expiresIn: '20s'
         });
-        
+        const refreshToken = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, {
+            expiresIn: '1d'
+        });
 
         const res = NextResponse.json({
             message: "Login berhasil",
