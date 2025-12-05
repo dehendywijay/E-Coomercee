@@ -1,12 +1,12 @@
 import { PrismaClient } from "@/app/generated/prisma/client";
-import { signToken } from "@/lib/jwt";
 import bcrypt from "bcryptjs";
+import { sign } from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
-// Inisialisasi Prisma Client
+
 const prisma = new PrismaClient();
 
-// Fungsi POST untuk menangani permintaan login
+
 export async function POST (req: Request) {
     try {
         const data = await req.json();
@@ -41,20 +41,21 @@ export async function POST (req: Request) {
         }
         
 
-        const token = signToken({ id: user.id, email: user.email });
+        const accesToken = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, {
+            expiresIn: '20s'
+        });
+        
 
         const res = NextResponse.json({
             message: "Login berhasil",
             status: true,
-            user: { id: user.id, email: user.email }
+            user: { id: user.id, email: user.email },
+            token: token
         });
 
         res.cookies.set("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            path: "/",
-            maxAge: 60 * 60 * 24, 
+            secure: true,
         });
 
         return res;
