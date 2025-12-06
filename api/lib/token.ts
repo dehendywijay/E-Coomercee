@@ -2,7 +2,7 @@ import { SignJWT } from 'jose';
 import { TextEncoder } from 'util';
 
 
-export async function createJoseToken(payload: { id: string; email: string }, expiresIn: string): Promise<string> {
+export async function createJoseToken(payload: { id: number; email: string }, expiresIn: string): Promise<string> {
  
     const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
     
