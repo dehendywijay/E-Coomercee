@@ -1,4 +1,5 @@
 import { PrismaClient } from "@/app/generated/prisma/client";
+import { createJoseToken } from "@/lib/token";
 import bcrypt from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { NextResponse } from "next/server";
@@ -7,7 +8,7 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 
-export async function POST (req: Request) {
+export async function POST (req: Request, res: Response) {
     try {
         const data = await req.json();
         const plainTextPassword = data.password; 
@@ -41,12 +42,11 @@ export async function POST (req: Request) {
         }
         
 
-        const accesToken = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, {
-            expiresIn: '20s'
-        });
-        const refreshToken = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, {
-            expiresIn: '1d'
-        });
+        const accesToken = await createJoseToken(
+            { id: user.id, email: user.email },
+            '30s' 
+        );
+        
 
         await prisma.user.update({
             where:{
