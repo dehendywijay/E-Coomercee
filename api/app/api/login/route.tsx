@@ -45,8 +45,11 @@ export async function POST (req: Request, res: Response) {
         const accesToken = await createJoseToken(
             { id: user.id, email: user.email },
             '30s' 
-        );
-        
+         );
+        const refreshToken = await createJoseToken(
+            { id: user.id, email: user.email }, 
+            '1d'
+          );
 
         await prisma.user.update({
             where:{
