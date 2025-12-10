@@ -31,6 +31,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
 
   const handleSignup = async (e: React.FormEvent) => {
   e.preventDefault(); 
@@ -39,6 +40,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       name,
       email,
       password,
+      confirmPassword
     });
     console.log(res.data.message);
     if (res) {
@@ -105,7 +107,12 @@ return (
               <FieldLabel htmlFor="confirm-password">
                 Confirm Password
               </FieldLabel>
-              <Input id="confirm-password" type="password" required />
+              <Input 
+              id="confirm-password" 
+              type="password" 
+              value={confirmPassword}
+              onChange={(e) => setconfirmPassword(e.target.value)}
+              required />
               <FieldDescription>Please confirm your password.</FieldDescription>
             </Field>
             <FieldGroup>
