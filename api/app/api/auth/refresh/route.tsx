@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
         const refreshToken = req.cookies.get('refreshToken')?.value;
         if(!refreshToken){
             return NextResponse.json({
-                message : `Tidak ada refresh token goblok, ${refreshToken}`,
+                message : "Tidak ada refresh token ",
                 status : false
 
             })
