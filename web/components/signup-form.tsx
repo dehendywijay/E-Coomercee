@@ -18,6 +18,8 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
 
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -32,6 +34,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
+  const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
   e.preventDefault(); 
@@ -42,8 +45,10 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       password,
       confirmPassword
     });
-    console.log(res.data.message);
-    if (res) {
+    if (res.data.status === true) {
+      toast.success(res.data.message);
+      router.push("/login");
+    }else {
       toast.success(res.data.message);
     }
     
