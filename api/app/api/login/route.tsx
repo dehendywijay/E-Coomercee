@@ -1,14 +1,13 @@
 import { PrismaClient } from "@/app/generated/prisma/client";
-import { createJoseToken } from "@/lib/token";
+import { createJoseRefreshToken, createJoseToken } from "@/lib/token";
 import bcrypt from "bcryptjs";
-import { sign } from "jsonwebtoken";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
 const prisma = new PrismaClient();
 
 
-export async function POST (req: Request, res: Response) {
+export async function POST (req: NextRequest, res: NextResponse) {
     try {
         const data = await req.json();
         const plainTextPassword = data.password; 
@@ -20,7 +19,8 @@ export async function POST (req: Request, res: Response) {
             select: {
                 id: true, 
                 email: true,
-                password: true 
+                password: true, 
+                name: true
             }
         });
 
@@ -43,11 +43,11 @@ export async function POST (req: Request, res: Response) {
         
 
         const accesToken = await createJoseToken(
-            { id: user.id, email: user.email },
+            { id: user.id, email: user.email, name: user.name },
             '30s' 
          );
-        const refreshToken = await createJoseToken(
-            { id: user.id, email: user.email }, 
+        const refreshToken = await createJoseRefreshToken(
+            { id: user.id, email: user.email, name: user.name }, 
             '1d'
           );
 
@@ -68,7 +68,9 @@ export async function POST (req: Request, res: Response) {
         res.cookies.set("refreshToken", refreshToken, {
             httpOnly: true,
             maxAge: 24 * 60 * 60,
-            secure: true,
+            secure: process.env.NODE_ENV === "production",
+            path: "/", 
+            sameSite: "strict",
         });
 
         return res;
