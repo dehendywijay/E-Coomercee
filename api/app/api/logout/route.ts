@@ -5,5 +5,9 @@ const prisma = new PrismaClient();
 
 export async function DELETE(req: NextRequest, res : NextResponse) {
     const refreshToken = req.cookies.get('refreshToken')?.value;
-       
+        if(!refreshToken) return NextResponse.json({
+            message : "Tidak ada refresh token ",
+            status : false
+        });
+    
 }
