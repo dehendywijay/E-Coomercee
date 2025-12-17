@@ -27,6 +27,10 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       const res = await axios.post("http://localhost:3001/api/login", {
       email,
       password,
+    },{
+    
+        withCredentials: true, 
+      
     });
     console.log(res.data.message);
     if (res.data.status === true) {
