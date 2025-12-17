@@ -10,4 +10,16 @@ export async function DELETE(req: NextRequest, res : NextResponse) {
             status : false
         });
     
+    const user = await prisma.user.findFirst({
+        where:{
+            refreshToken : refreshToken
+        }
+    })
+    if(!user){
+        return NextResponse.json({
+            message : "Refresh token tidak valid",
+            status : false
+        })
+    }
+   
 }
