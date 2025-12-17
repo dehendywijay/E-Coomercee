@@ -21,5 +21,18 @@ export async function DELETE(req: NextRequest, res : NextResponse) {
             status : false
         })
     }
-   
+    await prisma.user.update({
+        where:{
+            id : user.id
+        },
+        data:{
+            refreshToken : null
+        }
+    })
+
+    res.cookies.delete('refreshToken');
+    return NextResponse.json({
+        message : "Berhasil logout",
+        status : true
+    })
 }
