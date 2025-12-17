@@ -22,7 +22,23 @@ export function NavbarDefault(){
         .replace(/_/g, "/");
       return JSON.parse(atob(base64));
     };
+  const refreshToken = async () => {
+    console.log("refreshToken jalan");
+    try {
+      const response = await axios.get("http://localhost:3001/api/auth/refresh",{
+        withCredentials: true,
+      });
+      
+  const accessToken = response.data.accesToken;
+  setToken(accessToken);
+  const decoded = decodeJwtPayload(accessToken);
+  setNama(decoded.name);
+  console.log("decoded payload:", decoded.name);
   
+    } catch (error) {
+        console.error("error refreshToken:", error);
+    }
+  }
    // eslint-disable-next-line react-hooks/rules-of-hooks
    useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
