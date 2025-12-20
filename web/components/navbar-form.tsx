@@ -4,11 +4,12 @@ import { Input } from './ui/input'
 import {  Bell, Mail, Menu, Search, ShoppingCart, User } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState, useEffect } from "react"
+import { useAuth } from '@/app/context/authcontext';
 
 
 
 export function NavbarDefault(){
-  
+  const {user} = useAuth();
   return (
      <header className="w-full border-b bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4 md:px-6 gap-4">
@@ -51,7 +52,7 @@ export function NavbarDefault(){
           >
             <User className="h-5 w-5" />
             <span className="hidden text-sm font-medium md:inline">
-             
+             {user?.name}
             </span>
           </Button>
         </div>
