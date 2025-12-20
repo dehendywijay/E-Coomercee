@@ -15,9 +15,17 @@ async function getUserIdFromRequest(req: NextRequest) {
   return payload.id as number; 
 }
 
-export async function GET(req : NextRequest, res : NextResponse){
+export async function POST(req : NextRequest, res : NextResponse){ 
+    const userId = await getUserIdFromRequest(req);
     
-    const id = await getUserIdFromRequest(req);
-    return NextResponse.json({id})
+    const body = await req.json();
+    const { name, gender, phone, address, birthDate } = body;
 
+    if (name) {
+      await prisma.user.update({
+        where: { id: userId },
+        data: { name },
+      });
+    }
+    
 }
