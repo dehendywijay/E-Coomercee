@@ -4,52 +4,15 @@ import { Input } from './ui/input'
 import {  Bell, Mail, Menu, Search, ShoppingCart, User } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState, useEffect } from "react"
-import axios from 'axios';
+
 
 
 export function NavbarDefault(){
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [nama, setNama] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [token, setToken] = useState("");
-
-      const decodeJwtPayload = (token: string) => {
-      if (!token) {
-        throw new Error("Token kosong");
-      }
-      const base64 = token.split(".")[1]
-        .replace(/-/g, "+")
-        .replace(/_/g, "/");
-      return JSON.parse(atob(base64));
-    };
-  const refreshToken = async () => {
-    console.log("refreshToken jalan");
-    try {
-      const response = await axios.get("http://localhost:3001/api/auth/refresh",{
-        withCredentials: true,
-      });
-      
-  const accessToken = response.data.accesToken;
-  setToken(accessToken);
-  const decoded = decodeJwtPayload(accessToken);
-  setNama(decoded.name);
-  console.log("decoded payload:", decoded.name);
-  
-    } catch (error) {
-        console.error("error refreshToken:", error);
-    }
-  }
-   // eslint-disable-next-line react-hooks/rules-of-hooks
-   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    refreshToken();
-  }, []);
   
   return (
      <header className="w-full border-b bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4 md:px-6 gap-4">
-        {/* Kiri: menu (lebar tetap) */}
-        <div className="flex w-[48px] justify-start">
+        <div className="flex w-12 justify-start">
           <Button
             variant="ghost"
             size="icon"
@@ -58,8 +21,6 @@ export function NavbarDefault(){
             <Menu className="h-5 w-5" />
           </Button>
         </div>
-
-        {/* Tengah: search benar‑benar fleksibel */}
         <div className="flex-1">
           <div className="relative max-w-xl mx-auto">
             <Search
@@ -72,8 +33,6 @@ export function NavbarDefault(){
             />
           </div>
         </div>
-
-        {/* Kanan: ikon & nama, lebar kira‑kira seimbang dengan kiri */}
         <div className="flex w-[220px] items-center justify-end gap-1 md:gap-2">
           <Button variant="ghost" size="icon" aria-label="Keranjang Belanja">
             <ShoppingCart className="h-5 w-5" />
@@ -92,7 +51,7 @@ export function NavbarDefault(){
           >
             <User className="h-5 w-5" />
             <span className="hidden text-sm font-medium md:inline">
-              {nama}
+             
             </span>
           </Button>
         </div>
