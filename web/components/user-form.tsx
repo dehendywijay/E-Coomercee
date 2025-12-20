@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { NavbarDefault } from "./navbar-form";
+import { useAuth } from "@/app/context/authcontext";
 
 const tabs = [
   "Biodata Diri",
@@ -10,16 +11,16 @@ const tabs = [
 
 export  function ProfilePage() {
   const [activeTab, setActiveTab] = useState("Biodata Diri");
-
+  const {user} = useAuth();
   return (
     <main className="min-h-screen bg-gray-100">
       <NavbarDefault/>
       <header className="flex items-center justify-between px-8 py-4 border-b bg-white">
         <div className="flex items-center space-x-2">
-          <span className="font-semibold">Dehendy</span>
+          <span className="font-semibold">{user?.name}</span>
         </div>
         <div className="text-sm text-gray-500">
-          Dikirim ke <span className="font-semibold">Rumah Dehendy</span>
+          Dikirim ke <span className="font-semibold">Rumah {user?.name}</span>
         </div>
       </header>
 
@@ -38,7 +39,7 @@ export  function ProfilePage() {
               />
             </div>
             <div>
-              <p className="text-sm text-gray-500">Dehendy</p>
+              <p className="text-sm text-gray-500">{user?.name}</p>
               <p className="text-xs text-gray-400">PLUS •</p>
             </div>
           </div>
@@ -88,6 +89,7 @@ export  function ProfilePage() {
 }
 
 function BiodataSection() {
+  const {user} = useAuth();
   return (
     <div className="flex gap-8">
       {/* Foto profil */}
@@ -103,14 +105,14 @@ function BiodataSection() {
         <section>
           <h2 className="font-semibold mb-3">Ubah Biodata Diri</h2>
 
-          <Row label="Nama" value="Dehendy" action="Ubah" />
+          <Row label="Nama" value={user?.name ?? "-"} action="Ubah" />
           <Row label="Tanggal Lahir" value="-" action="Tambah Tanggal Lahir" />
           <Row label="Jenis Kelamin" value="-" action="Tambah Jenis Kelamin" />
         </section>
 
         <section>
           <h2 className="font-semibold mb-3">Ubah Kontak</h2>
-          <Row label="Email" value="dehendy@example.com" action="Tambah Email" />
+          <Row label="Email" value={user?.email ?? "-"} action="Tambah Email" />
           <Row
             label="Nomor HP"
             value="6289520218139"
