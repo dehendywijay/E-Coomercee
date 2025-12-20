@@ -16,6 +16,7 @@ async function getUserIdFromRequest(req: NextRequest) {
 }
 
 export async function POST(req : NextRequest, res : NextResponse){ 
+    try{
     const userId = await getUserIdFromRequest(req);
     
     const body = await req.json();
@@ -27,5 +28,30 @@ export async function POST(req : NextRequest, res : NextResponse){
         data: { name },
       });
     }
-    
+
+    await prisma.profile.upsert({
+      where: { userId },         
+      update: {
+        gender,
+        phone,
+        address,
+        birthDate: birthDate ? new Date(birthDate) : null,
+      },
+      create: {
+        userId,
+        gender,
+        phone,
+        address,
+        birthDate: birthDate ? new Date(birthDate) : null,
+      },
+    });
+
+    return NextResponse.json({ status: true, message: "Profil tersimpan" });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      { status: false, message: "Gagal menyimpan profil" },
+      { status: 400 }
+    );
+  }
 }
