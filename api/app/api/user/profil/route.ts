@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient()
 
-const secret = new TextEncoder().encode(process.env.REFRESH_TOKEN_SECRET!);
+const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
 
 async function getUserIdFromRequest(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
@@ -54,4 +54,11 @@ export async function POST(req : NextRequest, res : NextResponse){
       { status: 400 }
     );
   }
+}
+
+export async function GET(req : NextRequest, res : NextResponse){
+    const userId = await getUserIdFromRequest(req);
+    const profile = await prisma.user.findUnique({where : {id : userId}});
+
+    return NextResponse.json(profile?.refreshToken);
 }
