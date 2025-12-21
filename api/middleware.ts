@@ -1,60 +1,93 @@
-
+// middleware.ts
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { jwtVerify } from 'jose';
 
 const PUBLIC_PATHS = [
-    '/api/login',
-    '/api/signup',
-    '/api/auth/refresh'
+  '/api/login',
+  '/api/signup',
+  '/api/auth/refresh',
+
 ];
 
+const AUTH_PROTECTED_MATCHERS = ['/api/user/profil*' ]; // yang wajib lewat accessToken
+
+
+function withCors(request: NextRequest, response?: NextResponse | Response) {
+  const origin = request.headers.get('origin') || '*';
+
+  
+  const res = response ?? NextResponse.next();
+
+  res.headers.set('Access-Control-Allow-Origin', origin);
+  res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.headers.set('Access-Control-Allow-Credentials', 'true');
+  res.headers.set('Access-Control-Max-Age', '86400');
+
+  return res;
+}
+
 export async function middleware(request: NextRequest) {
-    const { pathname } = request.nextUrl;
-    
-    let response: NextResponse | Response;
+  const { pathname } = request.nextUrl;
 
-    const origin = request.headers.get('origin') || '*'
-    
-    if (request.method === 'OPTIONS') {
-        response = new Response(null, { status: 200 });
-    } else {
-        response = NextResponse.next();
-    }
-    
-    response.headers.set('Access-Control-Allow-Origin', origin)
-    response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH')
-    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
-    response.headers.set('Access-Control-Allow-Credentials', 'true')
-    response.headers.set('Access-Control-Max-Age', '86400')
 
-    if (request.method === 'OPTIONS') {
-        return response; 
-    }
-    
-    if (PUBLIC_PATHS.some((route) => pathname.startsWith(route))) {
-        return response; 
-    }
-    
-    const authHeader = request.headers.get("authorization");
-    const token = authHeader?.split(" ")[1];
+  if (request.method === 'OPTIONS') {
+    const preflightResponse = new Response(null, { status: 200 });
+    return withCors(request, preflightResponse);
+  }
 
-    if (!token) {
-        return NextResponse.json({ error: "Unauthorized: Token tidak ditemukan" }, { status: 401 });
-    }
+  const response = withCors(request);
 
-    try {
-        const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
-        await jwtVerify(token, secret);
+  const needAuth = AUTH_PROTECTED_MATCHERS.some((base) =>
+    pathname.startsWith(base)
+  );
 
-    } catch (err) {
-         console.error('JWT Verification Failed:', (err as Error).name, (err as Error).message);
-        return NextResponse.json({ error: "Forbidden: Token tidak valid" }, { status: 403 });
-    }
+  if (!needAuth) {
+    return response;
+  }
+
+ 
+  if (PUBLIC_PATHS.some((route) => pathname.startsWith(route))) {
+    return response;
+  }
+
+
+  const authHeader = request.headers.get('authorization');
+  const token = authHeader?.split(' ')[1];
+
+  if (!token) {
+    return NextResponse.json(
+      { error: 'Unauthorized: Token tidak ditemukan' },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+    const { payload } = await jwtVerify(token, secret);
+    await jwtVerify(token, secret);
+    if (payload.type !== "access") {
+    return NextResponse.json(
+      { error: "Forbidden: Token bukan access token" },
+      { status: 403 }
+    );
+  }
+    return response;
+  } catch (err) {
+    console.error(
+      'JWT Verification Failed:',
+      (err as Error).name,
+      (err as Error).message
+    );
+    return NextResponse.json(
+      { error: 'Forbidden: Token tidak valid' },
+      { status: 403 }
+    );
+  }
 }
 
-
+// CORS untuk semua path, tapi auth cuma untuk /api/* dan /home/*
 export const config = {
-    // Middleware akan dijalankan untuk semua path di bawah /api/ dan /home/
-    matcher: ['/api/:pathname*', '/home/:pathname*'],
-}
+  matcher: ['/:path*'],
+};
