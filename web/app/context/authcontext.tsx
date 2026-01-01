@@ -51,10 +51,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try{
         const profileRes = await axios.get(
           `http://localhost:3001/api/user/profil/${decoded.id}`,{ 
+            headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
           }
        );
-       const profile: Profile = profileRes.data;
+        profile = profileRes.data;
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {
           profile = undefined;

@@ -761,7 +761,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ProfileScalarFieldEnum = {
   id: 'id',
-  bio: 'bio',
+  gender: 'gender',
   phone: 'phone',
   address: 'address',
   birthDate: 'birthDate',
@@ -773,6 +773,7 @@ export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeo
 
 export const StoreScalarFieldEnum = {
   id: 'id',
+  buka: 'buka',
   name: 'name',
   location: 'location',
   isOfficial: 'isOfficial',
@@ -859,6 +860,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'jenisKelamin'
+ */
+export type EnumjenisKelaminFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'jenisKelamin'>
+    
+
+
+/**
+ * Reference to a field of type 'jenisKelamin[]'
+ */
+export type ListEnumjenisKelaminFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'jenisKelamin[]'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -869,6 +884,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'cekStore'
+ */
+export type EnumcekStoreFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'cekStore'>
+    
+
+
+/**
+ * Reference to a field of type 'cekStore[]'
+ */
+export type ListEnumcekStoreFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'cekStore[]'>
     
 
 

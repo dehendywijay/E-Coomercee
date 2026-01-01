@@ -43,7 +43,7 @@ export async function POST (req: NextRequest, res: NextResponse) {
         
 
         const accesToken = await createJoseToken(
-            { id: user.id, email: user.email, name: user.name },
+            { id: user.id, email: user.email, name: user.name},
             '30s' 
          );
         const refreshToken = await createJoseRefreshToken(

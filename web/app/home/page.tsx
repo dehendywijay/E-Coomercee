@@ -8,5 +8,6 @@ export default function page() {
     <section >
       <HomeForm/>
     </section>
+    
   )
 }

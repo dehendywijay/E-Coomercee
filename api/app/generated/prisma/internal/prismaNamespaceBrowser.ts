@@ -84,7 +84,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ProfileScalarFieldEnum = {
   id: 'id',
-  bio: 'bio',
+  gender: 'gender',
   phone: 'phone',
   address: 'address',
   birthDate: 'birthDate',
@@ -96,6 +96,7 @@ export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeo
 
 export const StoreScalarFieldEnum = {
   id: 'id',
+  buka: 'buka',
   name: 'name',
   location: 'location',
   isOfficial: 'isOfficial',

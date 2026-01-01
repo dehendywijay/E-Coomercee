@@ -34,6 +34,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
     });
     console.log(res.data.message);
     if (res.data.status === true) {
+      const accesToken = res.data.token;
       toast.success(res.data.message);
       router.push("/home");
     }else {

@@ -36,6 +36,7 @@ export type StoreSumAggregateOutputType = {
 
 export type StoreMinAggregateOutputType = {
   id: string | null
+  buka: $Enums.cekStore | null
   name: string | null
   location: string | null
   isOfficial: boolean | null
@@ -44,6 +45,7 @@ export type StoreMinAggregateOutputType = {
 
 export type StoreMaxAggregateOutputType = {
   id: string | null
+  buka: $Enums.cekStore | null
   name: string | null
   location: string | null
   isOfficial: boolean | null
@@ -52,6 +54,7 @@ export type StoreMaxAggregateOutputType = {
 
 export type StoreCountAggregateOutputType = {
   id: number
+  buka: number
   name: number
   location: number
   isOfficial: number
@@ -70,6 +73,7 @@ export type StoreSumAggregateInputType = {
 
 export type StoreMinAggregateInputType = {
   id?: true
+  buka?: true
   name?: true
   location?: true
   isOfficial?: true
@@ -78,6 +82,7 @@ export type StoreMinAggregateInputType = {
 
 export type StoreMaxAggregateInputType = {
   id?: true
+  buka?: true
   name?: true
   location?: true
   isOfficial?: true
@@ -86,6 +91,7 @@ export type StoreMaxAggregateInputType = {
 
 export type StoreCountAggregateInputType = {
   id?: true
+  buka?: true
   name?: true
   location?: true
   isOfficial?: true
@@ -181,6 +187,7 @@ export type StoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type StoreGroupByOutputType = {
   id: string
+  buka: $Enums.cekStore | null
   name: string
   location: string | null
   isOfficial: boolean
@@ -212,21 +219,23 @@ export type StoreWhereInput = {
   OR?: Prisma.StoreWhereInput[]
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   id?: Prisma.StringFilter<"Store"> | string
+  buka?: Prisma.EnumcekStoreNullableFilter<"Store"> | $Enums.cekStore | null
   name?: Prisma.StringFilter<"Store"> | string
   location?: Prisma.StringNullableFilter<"Store"> | string | null
   isOfficial?: Prisma.BoolFilter<"Store"> | boolean
   userId?: Prisma.IntFilter<"Store"> | number
-  user?: Prisma.XOR<Prisma.ProfileScalarRelationFilter, Prisma.ProfileWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.ProductListRelationFilter
 }
 
 export type StoreOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  buka?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   isOfficial?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  user?: Prisma.ProfileOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
   products?: Prisma.ProductOrderByRelationAggregateInput
 }
 
@@ -236,15 +245,17 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   OR?: Prisma.StoreWhereInput[]
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
+  buka?: Prisma.EnumcekStoreNullableFilter<"Store"> | $Enums.cekStore | null
   name?: Prisma.StringFilter<"Store"> | string
   location?: Prisma.StringNullableFilter<"Store"> | string | null
   isOfficial?: Prisma.BoolFilter<"Store"> | boolean
-  user?: Prisma.XOR<Prisma.ProfileScalarRelationFilter, Prisma.ProfileWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.ProductListRelationFilter
 }, "id" | "userId">
 
 export type StoreOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  buka?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   isOfficial?: Prisma.SortOrder
@@ -261,6 +272,7 @@ export type StoreScalarWhereWithAggregatesInput = {
   OR?: Prisma.StoreScalarWhereWithAggregatesInput[]
   NOT?: Prisma.StoreScalarWhereWithAggregatesInput | Prisma.StoreScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Store"> | string
+  buka?: Prisma.EnumcekStoreNullableWithAggregatesFilter<"Store"> | $Enums.cekStore | null
   name?: Prisma.StringWithAggregatesFilter<"Store"> | string
   location?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
   isOfficial?: Prisma.BoolWithAggregatesFilter<"Store"> | boolean
@@ -269,15 +281,17 @@ export type StoreScalarWhereWithAggregatesInput = {
 
 export type StoreCreateInput = {
   id?: string
+  buka?: $Enums.cekStore | null
   name: string
   location?: string | null
   isOfficial?: boolean
-  user: Prisma.ProfileCreateNestedOneWithoutStoreInput
+  user: Prisma.UserCreateNestedOneWithoutStoreInput
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
 }
 
 export type StoreUncheckedCreateInput = {
   id?: string
+  buka?: $Enums.cekStore | null
   name: string
   location?: string | null
   isOfficial?: boolean
@@ -287,15 +301,17 @@ export type StoreUncheckedCreateInput = {
 
 export type StoreUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  user?: Prisma.ProfileUpdateOneRequiredWithoutStoreNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -305,6 +321,7 @@ export type StoreUncheckedUpdateInput = {
 
 export type StoreCreateManyInput = {
   id?: string
+  buka?: $Enums.cekStore | null
   name: string
   location?: string | null
   isOfficial?: boolean
@@ -313,6 +330,7 @@ export type StoreCreateManyInput = {
 
 export type StoreUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -320,6 +338,7 @@ export type StoreUpdateManyMutationInput = {
 
 export type StoreUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -333,6 +352,7 @@ export type StoreNullableScalarRelationFilter = {
 
 export type StoreCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  buka?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   isOfficial?: Prisma.SortOrder
@@ -345,6 +365,7 @@ export type StoreAvgOrderByAggregateInput = {
 
 export type StoreMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  buka?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   isOfficial?: Prisma.SortOrder
@@ -353,6 +374,7 @@ export type StoreMaxOrderByAggregateInput = {
 
 export type StoreMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  buka?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   isOfficial?: Prisma.SortOrder
@@ -400,6 +422,10 @@ export type StoreUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutUserInput, Prisma.StoreUpdateWithoutUserInput>, Prisma.StoreUncheckedUpdateWithoutUserInput>
 }
 
+export type NullableEnumcekStoreFieldUpdateOperationsInput = {
+  set?: $Enums.cekStore | null
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -420,6 +446,7 @@ export type StoreUpdateOneRequiredWithoutProductsNestedInput = {
 
 export type StoreCreateWithoutUserInput = {
   id?: string
+  buka?: $Enums.cekStore | null
   name: string
   location?: string | null
   isOfficial?: boolean
@@ -428,6 +455,7 @@ export type StoreCreateWithoutUserInput = {
 
 export type StoreUncheckedCreateWithoutUserInput = {
   id?: string
+  buka?: $Enums.cekStore | null
   name: string
   location?: string | null
   isOfficial?: boolean
@@ -452,6 +480,7 @@ export type StoreUpdateToOneWithWhereWithoutUserInput = {
 
 export type StoreUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -460,6 +489,7 @@ export type StoreUpdateWithoutUserInput = {
 
 export type StoreUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -468,14 +498,16 @@ export type StoreUncheckedUpdateWithoutUserInput = {
 
 export type StoreCreateWithoutProductsInput = {
   id?: string
+  buka?: $Enums.cekStore | null
   name: string
   location?: string | null
   isOfficial?: boolean
-  user: Prisma.ProfileCreateNestedOneWithoutStoreInput
+  user: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
 export type StoreUncheckedCreateWithoutProductsInput = {
   id?: string
+  buka?: $Enums.cekStore | null
   name: string
   location?: string | null
   isOfficial?: boolean
@@ -500,14 +532,16 @@ export type StoreUpdateToOneWithWhereWithoutProductsInput = {
 
 export type StoreUpdateWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  user?: Prisma.ProfileUpdateOneRequiredWithoutStoreNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOfficial?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -547,62 +581,67 @@ export type StoreCountOutputTypeCountProductsArgs<ExtArgs extends runtime.Types.
 
 export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  buka?: boolean
   name?: boolean
   location?: boolean
   isOfficial?: boolean
   userId?: boolean
-  user?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  buka?: boolean
   name?: boolean
   location?: boolean
   isOfficial?: boolean
   userId?: boolean
-  user?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  buka?: boolean
   name?: boolean
   location?: boolean
   isOfficial?: boolean
   userId?: boolean
-  user?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectScalar = {
   id?: boolean
+  buka?: boolean
   name?: boolean
   location?: boolean
   isOfficial?: boolean
   userId?: boolean
 }
 
-export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "isOfficial" | "userId", ExtArgs["result"]["store"]>
+export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "buka" | "name" | "location" | "isOfficial" | "userId", ExtArgs["result"]["store"]>
 export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type StoreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Store"
   objects: {
-    user: Prisma.$ProfilePayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
     products: Prisma.$ProductPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    buka: $Enums.cekStore | null
     name: string
     location: string | null
     isOfficial: boolean
@@ -1001,7 +1040,7 @@ readonly fields: StoreFieldRefs;
  */
 export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.ProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__ProfileClient<runtime.Types.Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   products<T extends Prisma.Store$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1033,6 +1072,7 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface StoreFieldRefs {
   readonly id: Prisma.FieldRef<"Store", 'String'>
+  readonly buka: Prisma.FieldRef<"Store", 'cekStore'>
   readonly name: Prisma.FieldRef<"Store", 'String'>
   readonly location: Prisma.FieldRef<"Store", 'String'>
   readonly isOfficial: Prisma.FieldRef<"Store", 'Boolean'>

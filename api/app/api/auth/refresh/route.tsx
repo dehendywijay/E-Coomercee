@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
             const email = user.email;
             const accesToken = await createJoseToken(
                 { id: userId, email: email, name: user.name },
-                '30s' 
+                '100s' 
              );
             return NextResponse.json({accesToken})
             

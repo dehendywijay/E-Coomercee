@@ -112,6 +112,13 @@ export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
 }
 
+export type EnumjenisKelaminNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.jenisKelamin | Prisma.EnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  in?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumjenisKelaminNullableFilter<$PrismaModel> | $Enums.jenisKelamin | null
+}
+
 export type DateTimeNullableFilter<$PrismaModel = never> = {
   equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
   in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -121,6 +128,16 @@ export type DateTimeNullableFilter<$PrismaModel = never> = {
   gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
+export type EnumjenisKelaminNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.jenisKelamin | Prisma.EnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  in?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumjenisKelaminNullableWithAggregatesFilter<$PrismaModel> | $Enums.jenisKelamin | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumjenisKelaminNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumjenisKelaminNullableFilter<$PrismaModel>
 }
 
 export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -137,9 +154,26 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+export type EnumcekStoreNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.cekStore | Prisma.EnumcekStoreFieldRefInput<$PrismaModel> | null
+  in?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumcekStoreNullableFilter<$PrismaModel> | $Enums.cekStore | null
+}
+
 export type BoolFilter<$PrismaModel = never> = {
   equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
+export type EnumcekStoreNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.cekStore | Prisma.EnumcekStoreFieldRefInput<$PrismaModel> | null
+  in?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumcekStoreNullableWithAggregatesFilter<$PrismaModel> | $Enums.cekStore | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumcekStoreNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumcekStoreNullableFilter<$PrismaModel>
 }
 
 export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -315,6 +349,13 @@ export type NestedIntNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
 }
 
+export type NestedEnumjenisKelaminNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.jenisKelamin | Prisma.EnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  in?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumjenisKelaminNullableFilter<$PrismaModel> | $Enums.jenisKelamin | null
+}
+
 export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
   equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
   in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -324,6 +365,16 @@ export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
   gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
+export type NestedEnumjenisKelaminNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.jenisKelamin | Prisma.EnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  in?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.jenisKelamin[] | Prisma.ListEnumjenisKelaminFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumjenisKelaminNullableWithAggregatesFilter<$PrismaModel> | $Enums.jenisKelamin | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumjenisKelaminNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumjenisKelaminNullableFilter<$PrismaModel>
 }
 
 export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -340,9 +391,26 @@ export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+export type NestedEnumcekStoreNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.cekStore | Prisma.EnumcekStoreFieldRefInput<$PrismaModel> | null
+  in?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumcekStoreNullableFilter<$PrismaModel> | $Enums.cekStore | null
+}
+
 export type NestedBoolFilter<$PrismaModel = never> = {
   equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
+}
+
+export type NestedEnumcekStoreNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.cekStore | Prisma.EnumcekStoreFieldRefInput<$PrismaModel> | null
+  in?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.cekStore[] | Prisma.ListEnumcekStoreFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumcekStoreNullableWithAggregatesFilter<$PrismaModel> | $Enums.cekStore | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumcekStoreNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumcekStoreNullableFilter<$PrismaModel>
 }
 
 export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {

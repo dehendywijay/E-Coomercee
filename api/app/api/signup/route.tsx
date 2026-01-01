@@ -40,6 +40,12 @@ export async function POST(req: NextRequest) {
         }
     })
 
+    // await prisma.profile.create({
+    //     data : {
+    //         userId : 
+    //     }
+    // })
+
     return NextResponse.json({
         message: "Data berhasil disimpan", 
         status: true 

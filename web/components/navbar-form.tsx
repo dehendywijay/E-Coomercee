@@ -10,6 +10,7 @@ import { useAuth } from '@/app/context/authcontext';
 
 export function NavbarDefault(){
   const {user} = useAuth();
+  
   return (
      <header className="w-full border-b bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4 md:px-6 gap-4">
