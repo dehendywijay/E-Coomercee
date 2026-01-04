@@ -21,11 +21,8 @@ export async function POST(req: NextRequest){
     const { name, imageSrc, originalPrice, discountPercentage, rating, salesCount, location, stock, description } = body;
 
     
-        await prisma.product.upsert({
-        where :{
-            storeId : userId,
-        },
-        update: {
+        await prisma.product.create({
+        data : {
             name,
             imageSrc,
             originalPrice,
@@ -35,31 +32,7 @@ export async function POST(req: NextRequest){
             location,
             stock,
             description,
-            store:{
-                connect : {userId}
-            }
-            
-        }, 
-        create: {
-            name,
-            imageSrc,
-            originalPrice,
-            discountPercentage,
-            rating,
-            salesCount,
-            location,
-            stock,
-            description,
-            store:{
-                connect : {userId}
-            }
-        },
-        include: {
-            store: {
-                include: {
-                    user: true,
-                },
-            },
+            storeId: userId
         },
     });
     return NextResponse.json({ status: true, message: "Produk berhasil ditambahkan" });
