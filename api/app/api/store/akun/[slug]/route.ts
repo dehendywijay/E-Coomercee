@@ -16,10 +16,11 @@ export const GET = async (res : NextResponse,
     });
     if (!profil) {
         return NextResponse.json(
-        { message: "Profile tidak ditemukan" },
-        { status: 404 }
+            { message: "Profile tidak ditemukan" },
+            { status: 404 }
         );
     }
     
-    
+    i
+    return NextResponse.json(profil);
 }
