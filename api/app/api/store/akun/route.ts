@@ -17,3 +17,7 @@ async function getUserIdFromRequest(req: NextRequest) {
 export async function POST(req: NextRequest) {
 
 }
+
+export async function GET(req: NextRequest) {
+   const userId = await getUserIdFromRequest(req);
+}
