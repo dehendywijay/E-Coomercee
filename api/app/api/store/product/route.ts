@@ -35,7 +35,9 @@ export async function POST(req: NextRequest){
             location,
             stock,
             description,
-           
+            store:{
+                connect : {userId}
+            }
             
         }, 
         create: {
@@ -48,9 +50,18 @@ export async function POST(req: NextRequest){
             location,
             stock,
             description,
-            
+            store:{
+                connect : {userId}
+            }
         },
-        });
+        include: {
+            store: {
+                include: {
+                    user: true,
+                },
+            },
+        },
+    });
     return NextResponse.json({ status: true, message: "Produk berhasil ditambahkan" });
     }catch (err) {
     
