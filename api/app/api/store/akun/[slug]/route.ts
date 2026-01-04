@@ -14,6 +14,12 @@ export const GET = async (res : NextResponse,
             location : true
         }
     });
-
+    if (!profil) {
+        return NextResponse.json(
+        { message: "Profile tidak ditemukan" },
+        { status: 404 }
+        );
+    }
+    
     
 }
