@@ -6,7 +6,7 @@ export const GET = async (res : NextResponse,
     ctx: { params: Promise<{ slug: string }> }) => {
     const { slug } = await ctx.params;
     
-    const profil = await prisma.store.findUnique({
+    const store = await prisma.store.findUnique({
         where : {
             userId : Number(slug)
         },select : {
@@ -14,13 +14,13 @@ export const GET = async (res : NextResponse,
             location : true
         }
     });
-    if (!profil) {
+    if (!store) {
         return NextResponse.json(
             { message: "Profile tidak ditemukan" },
             { status: 404 }
         );
     }
     
-    i
-    return NextResponse.json(profil);
+    
+    return NextResponse.json(store);
 }
