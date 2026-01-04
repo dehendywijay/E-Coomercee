@@ -21,7 +21,7 @@ type UserPayload = {
   email: string;
   name?: string;
   profile?: Profile;
-  Store?: Store;
+  store?: Store;
 };
 
 type AuthContextType = {
@@ -53,6 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const decoded = decodeJwtPayload(accessToken);
       let profile: Profile | undefined = undefined;
+      let store: Store | undefined = undefined;
       try{
         const profileRes = await axios.get(
           `http://localhost:3001/api/user/profil/${decoded.id}`,{ 
