@@ -354,7 +354,7 @@ function Row({
   onAction?: () => void;
 }) {
   const isString = typeof value === "string" || typeof value === "number";
-
+  
   return (
     <div className="flex items-center justify-between py-2 border-b last:border-b-0">
       <div>
@@ -382,14 +382,14 @@ function Row({
 
 
 export function StoreSection() {
-
+  const {user} = useAuth();
   return (
       <div className="flex flex-col gap-4">
       <h2 className="font-semibold mb-3">Toko Saya</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-3 text-sm">
-          <Row label="Nama Toko" value= "-" />
+          <Row label="Nama Toko" value= {user?.store?.name ?? "-"} />
           <Row label="Lokasi" value= "-" />
           <Row label="Deskripsi" value= "-" />
         </div>
