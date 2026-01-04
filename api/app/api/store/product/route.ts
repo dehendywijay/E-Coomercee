@@ -32,7 +32,11 @@ export async function POST(req: NextRequest){
             location,
             stock,
             description,
-            storeId: userId
+            store : {
+                connect : {
+                    userId : userId
+                }
+            }
         },
     });
     return NextResponse.json({ status: true, message: "Produk berhasil ditambahkan" });
