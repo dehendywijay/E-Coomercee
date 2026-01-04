@@ -61,6 +61,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             withCredentials: true 
           }
        );
+       const storeRes = await axios.get(
+          `http://localhost:3001/api/store/akun/${decoded.id}`,{ 
+            headers: { Authorization: `Bearer ${accessToken}` },
+            withCredentials: true 
+          }
+       );
+        store = storeRes.data;
         profile = profileRes.data;
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {
