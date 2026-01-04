@@ -1,6 +1,6 @@
 import { PrismaClient } from "@/app/generated/prisma/client";
 import { jwtVerify } from "jose";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient()
 const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
@@ -15,6 +15,8 @@ async function getUserIdFromRequest(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  
+  try{
   const userId = await getUserIdFromRequest(req);
   const body = await req.json();
   const { buka, name, location } = body;
@@ -33,6 +35,14 @@ export async function POST(req: NextRequest) {
         userId,
       },
     });
-
-
+    return NextResponse.json({ status: true, message: "Profil tersimpan" });
+  } catch (err) {
+    
+    console.error(err);
+    return NextResponse.json(
+      { status: false, message: "Gagal menyimpan Data"},
+      { status: 400 },
+      
+    );
   }
+}
