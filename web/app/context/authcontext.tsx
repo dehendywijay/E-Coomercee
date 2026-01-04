@@ -11,11 +11,17 @@ type Profile = {
   
 };
 
+type Store = {
+  name   :  string  
+  location  : string
+}
+
 type UserPayload = {
   id: string;
   email: string;
   name?: string;
   profile?: Profile;
+  Store?: Store;
 };
 
 type AuthContextType = {
@@ -37,7 +43,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState("");
 
   const refreshToken = async () => {
-    console.log("refresh token");
     try {
       const response = await axios.get("http://localhost:3001/api/auth/refresh", {
         withCredentials: true,
