@@ -15,9 +15,24 @@ async function getUserIdFromRequest(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const userId = await getUserIdFromRequest(req);
+  const body = await req.json();
+  const { buka, name, location } = body;
 
-}
+  await prisma.store.upsert({
+      where: { userId },         
+      update: {
+        buka,
+        name,
+        location,
+      },
+      create: {
+        buka,
+        name,
+        location,
+        userId,
+      },
+    });
 
-export async function GET(req: NextRequest) {
-   const userId = await getUserIdFromRequest(req);
-}
+
+  }
