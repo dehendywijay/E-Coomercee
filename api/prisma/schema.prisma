@@ -73,7 +73,7 @@ model Product {
   description       String?
   
 
-  storeId           Int   @unique
+  storeId           Int   
   store             Store     @relation(fields: [storeId], references: [id])
 }
 
