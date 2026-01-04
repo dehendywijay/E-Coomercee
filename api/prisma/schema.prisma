@@ -48,7 +48,7 @@ model Profile {
 }
 
 model Store {
-  id          String   @id @default(cuid())
+  id          Int      @id @default(autoincrement())
   buka        cekStore? @default(NO)
   name        String
   location    String?
@@ -60,19 +60,20 @@ model Store {
 }
 
 model Product {
-  id                String   @id @default(cuid())
+  id                Int      @id @default(autoincrement())
   name              String
   imageSrc          String
-  currentPrice      Float
+  stock             Int
   originalPrice     Float?
   discountPercentage Float?
   rating            Float
   salesCount        String
   bonusText         String?
   location          String
-  isOfficialStore   Boolean   @default(false)
+  description       String?
+  
 
-  storeId           String
+  storeId           Int
   store             Store     @relation(fields: [storeId], references: [id])
 }
 
