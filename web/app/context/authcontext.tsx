@@ -68,6 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const decoded = decodeJwtPayload(accessToken);
       let profile: Profile | undefined = undefined;
       let store: Store | undefined = undefined;
+      let products: Product[] | undefined = undefined;
       try{
         const profileRes = await axios.get(
           `http://localhost:3001/api/user/profil/${decoded.id}`,{ 
