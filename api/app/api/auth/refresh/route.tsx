@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
             await jwtVerify(refreshToken,secret);
             const userId = user.id;
             const email = user.email;
-            const storeId = user.store ? BigInt(user.store.id) : BigInt(0);
+            const storeId = Number(user.store?.userId) || 0;
             const accesToken = await createJoseTokenRefresh(
                 { id: userId, email: email, name: user.name, storeid: storeId }, 
                 '100s' 
