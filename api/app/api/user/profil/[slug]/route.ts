@@ -13,7 +13,11 @@ export const GET = async (res : NextResponse,
             gender : true,
             phone : true,
             address : true,
-            birthDate: true
+            birthDate: true,
+            user : {
+                select : {
+                    email : true
+        },}
         }
     });
 

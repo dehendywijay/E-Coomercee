@@ -27,92 +27,100 @@ export type AggregateProduct = {
 }
 
 export type ProductAvgAggregateOutputType = {
-  currentPrice: number | null
+  id: number | null
+  stock: number | null
   originalPrice: number | null
   discountPercentage: number | null
   rating: number | null
+  storeId: number | null
 }
 
 export type ProductSumAggregateOutputType = {
-  currentPrice: number | null
+  id: number | null
+  stock: number | null
   originalPrice: number | null
   discountPercentage: number | null
   rating: number | null
+  storeId: number | null
 }
 
 export type ProductMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   imageSrc: string | null
-  currentPrice: number | null
+  stock: number | null
   originalPrice: number | null
   discountPercentage: number | null
   rating: number | null
   salesCount: string | null
   bonusText: string | null
   location: string | null
-  isOfficialStore: boolean | null
-  storeId: string | null
+  description: string | null
+  storeId: number | null
 }
 
 export type ProductMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   imageSrc: string | null
-  currentPrice: number | null
+  stock: number | null
   originalPrice: number | null
   discountPercentage: number | null
   rating: number | null
   salesCount: string | null
   bonusText: string | null
   location: string | null
-  isOfficialStore: boolean | null
-  storeId: string | null
+  description: string | null
+  storeId: number | null
 }
 
 export type ProductCountAggregateOutputType = {
   id: number
   name: number
   imageSrc: number
-  currentPrice: number
+  stock: number
   originalPrice: number
   discountPercentage: number
   rating: number
   salesCount: number
   bonusText: number
   location: number
-  isOfficialStore: number
+  description: number
   storeId: number
   _all: number
 }
 
 
 export type ProductAvgAggregateInputType = {
-  currentPrice?: true
+  id?: true
+  stock?: true
   originalPrice?: true
   discountPercentage?: true
   rating?: true
+  storeId?: true
 }
 
 export type ProductSumAggregateInputType = {
-  currentPrice?: true
+  id?: true
+  stock?: true
   originalPrice?: true
   discountPercentage?: true
   rating?: true
+  storeId?: true
 }
 
 export type ProductMinAggregateInputType = {
   id?: true
   name?: true
   imageSrc?: true
-  currentPrice?: true
+  stock?: true
   originalPrice?: true
   discountPercentage?: true
   rating?: true
   salesCount?: true
   bonusText?: true
   location?: true
-  isOfficialStore?: true
+  description?: true
   storeId?: true
 }
 
@@ -120,14 +128,14 @@ export type ProductMaxAggregateInputType = {
   id?: true
   name?: true
   imageSrc?: true
-  currentPrice?: true
+  stock?: true
   originalPrice?: true
   discountPercentage?: true
   rating?: true
   salesCount?: true
   bonusText?: true
   location?: true
-  isOfficialStore?: true
+  description?: true
   storeId?: true
 }
 
@@ -135,14 +143,14 @@ export type ProductCountAggregateInputType = {
   id?: true
   name?: true
   imageSrc?: true
-  currentPrice?: true
+  stock?: true
   originalPrice?: true
   discountPercentage?: true
   rating?: true
   salesCount?: true
   bonusText?: true
   location?: true
-  isOfficialStore?: true
+  description?: true
   storeId?: true
   _all?: true
 }
@@ -234,18 +242,18 @@ export type ProductGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type ProductGroupByOutputType = {
-  id: string
+  id: number
   name: string
   imageSrc: string
-  currentPrice: number
+  stock: number
   originalPrice: number | null
   discountPercentage: number | null
   rating: number
   salesCount: string
   bonusText: string | null
   location: string
-  isOfficialStore: boolean
-  storeId: string
+  description: string | null
+  storeId: number
   _count: ProductCountAggregateOutputType | null
   _avg: ProductAvgAggregateOutputType | null
   _sum: ProductSumAggregateOutputType | null
@@ -272,18 +280,18 @@ export type ProductWhereInput = {
   AND?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
-  id?: Prisma.StringFilter<"Product"> | string
+  id?: Prisma.IntFilter<"Product"> | number
   name?: Prisma.StringFilter<"Product"> | string
   imageSrc?: Prisma.StringFilter<"Product"> | string
-  currentPrice?: Prisma.FloatFilter<"Product"> | number
+  stock?: Prisma.IntFilter<"Product"> | number
   originalPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
   discountPercentage?: Prisma.FloatNullableFilter<"Product"> | number | null
   rating?: Prisma.FloatFilter<"Product"> | number
   salesCount?: Prisma.StringFilter<"Product"> | string
   bonusText?: Prisma.StringNullableFilter<"Product"> | string | null
   location?: Prisma.StringFilter<"Product"> | string
-  isOfficialStore?: Prisma.BoolFilter<"Product"> | boolean
-  storeId?: Prisma.StringFilter<"Product"> | string
+  description?: Prisma.StringNullableFilter<"Product"> | string | null
+  storeId?: Prisma.IntFilter<"Product"> | number
   store?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.StoreWhereInput>
 }
 
@@ -291,34 +299,34 @@ export type ProductOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
-  currentPrice?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   discountPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
   rating?: Prisma.SortOrder
   salesCount?: Prisma.SortOrder
   bonusText?: Prisma.SortOrderInput | Prisma.SortOrder
   location?: Prisma.SortOrder
-  isOfficialStore?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   storeId?: Prisma.SortOrder
   store?: Prisma.StoreOrderByWithRelationInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   name?: Prisma.StringFilter<"Product"> | string
   imageSrc?: Prisma.StringFilter<"Product"> | string
-  currentPrice?: Prisma.FloatFilter<"Product"> | number
+  stock?: Prisma.IntFilter<"Product"> | number
   originalPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
   discountPercentage?: Prisma.FloatNullableFilter<"Product"> | number | null
   rating?: Prisma.FloatFilter<"Product"> | number
   salesCount?: Prisma.StringFilter<"Product"> | string
   bonusText?: Prisma.StringNullableFilter<"Product"> | string | null
   location?: Prisma.StringFilter<"Product"> | string
-  isOfficialStore?: Prisma.BoolFilter<"Product"> | boolean
-  storeId?: Prisma.StringFilter<"Product"> | string
+  description?: Prisma.StringNullableFilter<"Product"> | string | null
+  storeId?: Prisma.IntFilter<"Product"> | number
   store?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.StoreWhereInput>
 }, "id">
 
@@ -326,14 +334,14 @@ export type ProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
-  currentPrice?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   discountPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
   rating?: Prisma.SortOrder
   salesCount?: Prisma.SortOrder
   bonusText?: Prisma.SortOrderInput | Prisma.SortOrder
   location?: Prisma.SortOrder
-  isOfficialStore?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   storeId?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
   _avg?: Prisma.ProductAvgOrderByAggregateInput
@@ -346,122 +354,119 @@ export type ProductScalarWhereWithAggregatesInput = {
   AND?: Prisma.ProductScalarWhereWithAggregatesInput | Prisma.ProductScalarWhereWithAggregatesInput[]
   OR?: Prisma.ProductScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProductScalarWhereWithAggregatesInput | Prisma.ProductScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Product"> | number
   name?: Prisma.StringWithAggregatesFilter<"Product"> | string
   imageSrc?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  currentPrice?: Prisma.FloatWithAggregatesFilter<"Product"> | number
+  stock?: Prisma.IntWithAggregatesFilter<"Product"> | number
   originalPrice?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
   discountPercentage?: Prisma.FloatNullableWithAggregatesFilter<"Product"> | number | null
   rating?: Prisma.FloatWithAggregatesFilter<"Product"> | number
   salesCount?: Prisma.StringWithAggregatesFilter<"Product"> | string
   bonusText?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   location?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  isOfficialStore?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
-  storeId?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  storeId?: Prisma.IntWithAggregatesFilter<"Product"> | number
 }
 
 export type ProductCreateInput = {
-  id?: string
   name: string
   imageSrc: string
-  currentPrice: number
+  stock: number
   originalPrice?: number | null
   discountPercentage?: number | null
   rating: number
   salesCount: string
   bonusText?: string | null
   location: string
-  isOfficialStore?: boolean
+  description?: string | null
   store: Prisma.StoreCreateNestedOneWithoutProductsInput
 }
 
 export type ProductUncheckedCreateInput = {
-  id?: string
+  id?: number
   name: string
   imageSrc: string
-  currentPrice: number
+  stock: number
   originalPrice?: number | null
   discountPercentage?: number | null
   rating: number
   salesCount: string
   bonusText?: string | null
   location: string
-  isOfficialStore?: boolean
-  storeId: string
+  description?: string | null
+  storeId: number
 }
 
 export type ProductUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
-  currentPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   originalPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   discountPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   salesCount?: Prisma.StringFieldUpdateOperationsInput | string
   bonusText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  isOfficialStore?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   store?: Prisma.StoreUpdateOneRequiredWithoutProductsNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
-  currentPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   originalPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   discountPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   salesCount?: Prisma.StringFieldUpdateOperationsInput | string
   bonusText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  isOfficialStore?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  storeId?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storeId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProductCreateManyInput = {
-  id?: string
+  id?: number
   name: string
   imageSrc: string
-  currentPrice: number
+  stock: number
   originalPrice?: number | null
   discountPercentage?: number | null
   rating: number
   salesCount: string
   bonusText?: string | null
   location: string
-  isOfficialStore?: boolean
-  storeId: string
+  description?: string | null
+  storeId: number
 }
 
 export type ProductUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
-  currentPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   originalPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   discountPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   salesCount?: Prisma.StringFieldUpdateOperationsInput | string
   bonusText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  isOfficialStore?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ProductUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
-  currentPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   originalPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   discountPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   salesCount?: Prisma.StringFieldUpdateOperationsInput | string
   bonusText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  isOfficialStore?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  storeId?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storeId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProductListRelationFilter = {
@@ -478,36 +483,38 @@ export type ProductCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
-  currentPrice?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   salesCount?: Prisma.SortOrder
   bonusText?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  isOfficialStore?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   storeId?: Prisma.SortOrder
 }
 
 export type ProductAvgOrderByAggregateInput = {
-  currentPrice?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
+  storeId?: Prisma.SortOrder
 }
 
 export type ProductMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
-  currentPrice?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   salesCount?: Prisma.SortOrder
   bonusText?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  isOfficialStore?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   storeId?: Prisma.SortOrder
 }
 
@@ -515,22 +522,24 @@ export type ProductMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
-  currentPrice?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   salesCount?: Prisma.SortOrder
   bonusText?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  isOfficialStore?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   storeId?: Prisma.SortOrder
 }
 
 export type ProductSumOrderByAggregateInput = {
-  currentPrice?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
   discountPercentage?: Prisma.SortOrder
   rating?: Prisma.SortOrder
+  storeId?: Prisma.SortOrder
 }
 
 export type ProductCreateNestedManyWithoutStoreInput = {
@@ -575,14 +584,6 @@ export type ProductUncheckedUpdateManyWithoutStoreNestedInput = {
   deleteMany?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -591,32 +592,39 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type ProductCreateWithoutStoreInput = {
-  id?: string
   name: string
   imageSrc: string
-  currentPrice: number
+  stock: number
   originalPrice?: number | null
   discountPercentage?: number | null
   rating: number
   salesCount: string
   bonusText?: string | null
   location: string
-  isOfficialStore?: boolean
+  description?: string | null
 }
 
 export type ProductUncheckedCreateWithoutStoreInput = {
-  id?: string
+  id?: number
   name: string
   imageSrc: string
-  currentPrice: number
+  stock: number
   originalPrice?: number | null
   discountPercentage?: number | null
   rating: number
   salesCount: string
   bonusText?: string | null
   location: string
-  isOfficialStore?: boolean
+  description?: string | null
 }
 
 export type ProductCreateOrConnectWithoutStoreInput = {
@@ -649,74 +657,73 @@ export type ProductScalarWhereInput = {
   AND?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
   OR?: Prisma.ProductScalarWhereInput[]
   NOT?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
-  id?: Prisma.StringFilter<"Product"> | string
+  id?: Prisma.IntFilter<"Product"> | number
   name?: Prisma.StringFilter<"Product"> | string
   imageSrc?: Prisma.StringFilter<"Product"> | string
-  currentPrice?: Prisma.FloatFilter<"Product"> | number
+  stock?: Prisma.IntFilter<"Product"> | number
   originalPrice?: Prisma.FloatNullableFilter<"Product"> | number | null
   discountPercentage?: Prisma.FloatNullableFilter<"Product"> | number | null
   rating?: Prisma.FloatFilter<"Product"> | number
   salesCount?: Prisma.StringFilter<"Product"> | string
   bonusText?: Prisma.StringNullableFilter<"Product"> | string | null
   location?: Prisma.StringFilter<"Product"> | string
-  isOfficialStore?: Prisma.BoolFilter<"Product"> | boolean
-  storeId?: Prisma.StringFilter<"Product"> | string
+  description?: Prisma.StringNullableFilter<"Product"> | string | null
+  storeId?: Prisma.IntFilter<"Product"> | number
 }
 
 export type ProductCreateManyStoreInput = {
-  id?: string
+  id?: number
   name: string
   imageSrc: string
-  currentPrice: number
+  stock: number
   originalPrice?: number | null
   discountPercentage?: number | null
   rating: number
   salesCount: string
   bonusText?: string | null
   location: string
-  isOfficialStore?: boolean
+  description?: string | null
 }
 
 export type ProductUpdateWithoutStoreInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
-  currentPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   originalPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   discountPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   salesCount?: Prisma.StringFieldUpdateOperationsInput | string
   bonusText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  isOfficialStore?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ProductUncheckedUpdateWithoutStoreInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
-  currentPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   originalPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   discountPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   salesCount?: Prisma.StringFieldUpdateOperationsInput | string
   bonusText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  isOfficialStore?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ProductUncheckedUpdateManyWithoutStoreInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
-  currentPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   originalPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   discountPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   salesCount?: Prisma.StringFieldUpdateOperationsInput | string
   bonusText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  isOfficialStore?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -725,14 +732,14 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   name?: boolean
   imageSrc?: boolean
-  currentPrice?: boolean
+  stock?: boolean
   originalPrice?: boolean
   discountPercentage?: boolean
   rating?: boolean
   salesCount?: boolean
   bonusText?: boolean
   location?: boolean
-  isOfficialStore?: boolean
+  description?: boolean
   storeId?: boolean
   store?: boolean | Prisma.StoreDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
@@ -741,14 +748,14 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   name?: boolean
   imageSrc?: boolean
-  currentPrice?: boolean
+  stock?: boolean
   originalPrice?: boolean
   discountPercentage?: boolean
   rating?: boolean
   salesCount?: boolean
   bonusText?: boolean
   location?: boolean
-  isOfficialStore?: boolean
+  description?: boolean
   storeId?: boolean
   store?: boolean | Prisma.StoreDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
@@ -757,14 +764,14 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   name?: boolean
   imageSrc?: boolean
-  currentPrice?: boolean
+  stock?: boolean
   originalPrice?: boolean
   discountPercentage?: boolean
   rating?: boolean
   salesCount?: boolean
   bonusText?: boolean
   location?: boolean
-  isOfficialStore?: boolean
+  description?: boolean
   storeId?: boolean
   store?: boolean | Prisma.StoreDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
@@ -773,18 +780,18 @@ export type ProductSelectScalar = {
   id?: boolean
   name?: boolean
   imageSrc?: boolean
-  currentPrice?: boolean
+  stock?: boolean
   originalPrice?: boolean
   discountPercentage?: boolean
   rating?: boolean
   salesCount?: boolean
   bonusText?: boolean
   location?: boolean
-  isOfficialStore?: boolean
+  description?: boolean
   storeId?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "imageSrc" | "currentPrice" | "originalPrice" | "discountPercentage" | "rating" | "salesCount" | "bonusText" | "location" | "isOfficialStore" | "storeId", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "imageSrc" | "stock" | "originalPrice" | "discountPercentage" | "rating" | "salesCount" | "bonusText" | "location" | "description" | "storeId", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   store?: boolean | Prisma.StoreDefaultArgs<ExtArgs>
 }
@@ -801,18 +808,18 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     store: Prisma.$StorePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     name: string
     imageSrc: string
-    currentPrice: number
+    stock: number
     originalPrice: number | null
     discountPercentage: number | null
     rating: number
     salesCount: string
     bonusText: string | null
     location: string
-    isOfficialStore: boolean
-    storeId: string
+    description: string | null
+    storeId: number
   }, ExtArgs["result"]["product"]>
   composites: {}
 }
@@ -1237,18 +1244,18 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Product model
  */
 export interface ProductFieldRefs {
-  readonly id: Prisma.FieldRef<"Product", 'String'>
+  readonly id: Prisma.FieldRef<"Product", 'Int'>
   readonly name: Prisma.FieldRef<"Product", 'String'>
   readonly imageSrc: Prisma.FieldRef<"Product", 'String'>
-  readonly currentPrice: Prisma.FieldRef<"Product", 'Float'>
+  readonly stock: Prisma.FieldRef<"Product", 'Int'>
   readonly originalPrice: Prisma.FieldRef<"Product", 'Float'>
   readonly discountPercentage: Prisma.FieldRef<"Product", 'Float'>
   readonly rating: Prisma.FieldRef<"Product", 'Float'>
   readonly salesCount: Prisma.FieldRef<"Product", 'String'>
   readonly bonusText: Prisma.FieldRef<"Product", 'String'>
   readonly location: Prisma.FieldRef<"Product", 'String'>
-  readonly isOfficialStore: Prisma.FieldRef<"Product", 'Boolean'>
-  readonly storeId: Prisma.FieldRef<"Product", 'String'>
+  readonly description: Prisma.FieldRef<"Product", 'String'>
+  readonly storeId: Prisma.FieldRef<"Product", 'Int'>
 }
     
 

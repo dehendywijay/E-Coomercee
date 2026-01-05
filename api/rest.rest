@@ -1,6 +1,5 @@
 GET  http://localhost:3001/api/user/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJhaGlhbjMwMDgyMDA1QGdtYWlsLmNvbSIsIm5hbWUiOiJBaGlhbiIsImlhdCI6MTc2NjIyNzQ1OSwiZXhwIjoxNzY2MzEzODU5fQ.NTj1u5VRHIpuK9cnZpiz9qpVeZ8lNsfNCArtRyROO4c
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJhaGlhbjMwMDgyMDA1QGdtYWlsLmNvbSIsIm5hbWUiOiJhaCIsImlhdCI6MTc2NzUwNTk4NSwiZXhwIjoxNzY3NTA2MDE1fQ.8l7-fVvRMD5Y_xlZlI4e4NIuUfikImf9Qq80MbicLJA
 ###
 POST http://localhost:3001/api/login
 Content-Type: application/json
@@ -9,3 +8,6 @@ Content-Type: application/json
     "email" : "ahian30082005@gmail.com",
     "password" : "123"
 }
+
+###
+GET http://localhost:3001/api/auth/refresh

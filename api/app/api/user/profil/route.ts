@@ -60,5 +60,5 @@ export async function GET(req : NextRequest, res : NextResponse){
     const userId = await getUserIdFromRequest(req);
     const profile = await prisma.user.findUnique({where : {id : userId}});
 
-    return NextResponse.json(profile?.refreshToken);
+    return NextResponse.json( userId);
 }

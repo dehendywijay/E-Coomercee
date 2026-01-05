@@ -27,15 +27,17 @@ export type AggregateStore = {
 }
 
 export type StoreAvgAggregateOutputType = {
+  id: number | null
   userId: number | null
 }
 
 export type StoreSumAggregateOutputType = {
+  id: number | null
   userId: number | null
 }
 
 export type StoreMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   buka: $Enums.cekStore | null
   name: string | null
   location: string | null
@@ -44,7 +46,7 @@ export type StoreMinAggregateOutputType = {
 }
 
 export type StoreMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   buka: $Enums.cekStore | null
   name: string | null
   location: string | null
@@ -64,10 +66,12 @@ export type StoreCountAggregateOutputType = {
 
 
 export type StoreAvgAggregateInputType = {
+  id?: true
   userId?: true
 }
 
 export type StoreSumAggregateInputType = {
+  id?: true
   userId?: true
 }
 
@@ -186,7 +190,7 @@ export type StoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type StoreGroupByOutputType = {
-  id: string
+  id: number
   buka: $Enums.cekStore | null
   name: string
   location: string | null
@@ -218,7 +222,7 @@ export type StoreWhereInput = {
   AND?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   OR?: Prisma.StoreWhereInput[]
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
-  id?: Prisma.StringFilter<"Store"> | string
+  id?: Prisma.IntFilter<"Store"> | number
   buka?: Prisma.EnumcekStoreNullableFilter<"Store"> | $Enums.cekStore | null
   name?: Prisma.StringFilter<"Store"> | string
   location?: Prisma.StringNullableFilter<"Store"> | string | null
@@ -240,7 +244,7 @@ export type StoreOrderByWithRelationInput = {
 }
 
 export type StoreWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   userId?: number
   AND?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   OR?: Prisma.StoreWhereInput[]
@@ -271,7 +275,7 @@ export type StoreScalarWhereWithAggregatesInput = {
   AND?: Prisma.StoreScalarWhereWithAggregatesInput | Prisma.StoreScalarWhereWithAggregatesInput[]
   OR?: Prisma.StoreScalarWhereWithAggregatesInput[]
   NOT?: Prisma.StoreScalarWhereWithAggregatesInput | Prisma.StoreScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Store"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Store"> | number
   buka?: Prisma.EnumcekStoreNullableWithAggregatesFilter<"Store"> | $Enums.cekStore | null
   name?: Prisma.StringWithAggregatesFilter<"Store"> | string
   location?: Prisma.StringNullableWithAggregatesFilter<"Store"> | string | null
@@ -280,7 +284,6 @@ export type StoreScalarWhereWithAggregatesInput = {
 }
 
 export type StoreCreateInput = {
-  id?: string
   buka?: $Enums.cekStore | null
   name: string
   location?: string | null
@@ -290,7 +293,7 @@ export type StoreCreateInput = {
 }
 
 export type StoreUncheckedCreateInput = {
-  id?: string
+  id?: number
   buka?: $Enums.cekStore | null
   name: string
   location?: string | null
@@ -300,7 +303,6 @@ export type StoreUncheckedCreateInput = {
 }
 
 export type StoreUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -310,7 +312,7 @@ export type StoreUpdateInput = {
 }
 
 export type StoreUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -320,7 +322,7 @@ export type StoreUncheckedUpdateInput = {
 }
 
 export type StoreCreateManyInput = {
-  id?: string
+  id?: number
   buka?: $Enums.cekStore | null
   name: string
   location?: string | null
@@ -329,7 +331,6 @@ export type StoreCreateManyInput = {
 }
 
 export type StoreUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -337,7 +338,7 @@ export type StoreUpdateManyMutationInput = {
 }
 
 export type StoreUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -360,6 +361,7 @@ export type StoreCountOrderByAggregateInput = {
 }
 
 export type StoreAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -382,6 +384,7 @@ export type StoreMinOrderByAggregateInput = {
 }
 
 export type StoreSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -445,7 +448,6 @@ export type StoreUpdateOneRequiredWithoutProductsNestedInput = {
 }
 
 export type StoreCreateWithoutUserInput = {
-  id?: string
   buka?: $Enums.cekStore | null
   name: string
   location?: string | null
@@ -454,7 +456,7 @@ export type StoreCreateWithoutUserInput = {
 }
 
 export type StoreUncheckedCreateWithoutUserInput = {
-  id?: string
+  id?: number
   buka?: $Enums.cekStore | null
   name: string
   location?: string | null
@@ -479,7 +481,6 @@ export type StoreUpdateToOneWithWhereWithoutUserInput = {
 }
 
 export type StoreUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -488,7 +489,7 @@ export type StoreUpdateWithoutUserInput = {
 }
 
 export type StoreUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -497,7 +498,6 @@ export type StoreUncheckedUpdateWithoutUserInput = {
 }
 
 export type StoreCreateWithoutProductsInput = {
-  id?: string
   buka?: $Enums.cekStore | null
   name: string
   location?: string | null
@@ -506,7 +506,7 @@ export type StoreCreateWithoutProductsInput = {
 }
 
 export type StoreUncheckedCreateWithoutProductsInput = {
-  id?: string
+  id?: number
   buka?: $Enums.cekStore | null
   name: string
   location?: string | null
@@ -531,7 +531,6 @@ export type StoreUpdateToOneWithWhereWithoutProductsInput = {
 }
 
 export type StoreUpdateWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -540,7 +539,7 @@ export type StoreUpdateWithoutProductsInput = {
 }
 
 export type StoreUncheckedUpdateWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   buka?: Prisma.NullableEnumcekStoreFieldUpdateOperationsInput | $Enums.cekStore | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -640,7 +639,7 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     products: Prisma.$ProductPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     buka: $Enums.cekStore | null
     name: string
     location: string | null
@@ -1071,7 +1070,7 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the Store model
  */
 export interface StoreFieldRefs {
-  readonly id: Prisma.FieldRef<"Store", 'String'>
+  readonly id: Prisma.FieldRef<"Store", 'Int'>
   readonly buka: Prisma.FieldRef<"Store", 'cekStore'>
   readonly name: Prisma.FieldRef<"Store", 'String'>
   readonly location: Prisma.FieldRef<"Store", 'String'>
