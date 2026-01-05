@@ -82,7 +82,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             withCredentials: true 
           }
        );
+       const productRes = await axios.get(
+          `http://localhost:3001/api/store/product/${decoded.storeId}`,{ 
+            headers: { Authorization: `Bearer ${accessToken}` },
+            withCredentials: true 
+          }
+       );
         store = storeRes.data;
+        products = productRes.data;
         profile = profileRes.data;
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {
