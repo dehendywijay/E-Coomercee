@@ -185,7 +185,6 @@ const openEditPhone = () => {
 }
   };
 
-  console.log(draftName);
   
   
   const openEditBirthDate = () => {

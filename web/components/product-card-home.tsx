@@ -3,6 +3,9 @@
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 
+// const user = {userauth}
+
+
 export type Product = {
   id: number
   title: string

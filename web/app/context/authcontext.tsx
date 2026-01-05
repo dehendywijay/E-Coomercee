@@ -8,7 +8,6 @@ type Profile = {
   phone?: string;
   gender?: string;
   birthDate?: string;
-  
 };
 
 type Store = {
@@ -19,10 +18,10 @@ type Store = {
 type Product = {
   name            : string
   imageSrc        : string
-  stock         : bigint
-  originalPrice    : GLfloat
-  discountPercentage? : GLfloat
-  rating            : GLfloat
+  stock         : number
+  originalPrice    : number
+  discountPercentage? : number
+  rating            : number
   salesCount        : string
   bonusText         : string
   location     :    string
@@ -31,8 +30,9 @@ type Product = {
 
 type UserPayload = {
   id: string;
-  storeId: string; // storeId is stored in email field of token
+  email: string;
   name?: string;
+  userId: string;
   profile?: Profile;
   store?: Store;
   products?: Product[];
@@ -83,7 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }
        );
        const productRes = await axios.get(
-          `http://localhost:3001/api/store/product/${decoded.storeId}`,{ 
+          `http://localhost:3001/api/store/product/${decoded.id}`,{ 
             headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
           }
@@ -104,8 +104,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser({
         id: decoded.id,
-        storeId: decoded.email,
+        email: decoded.email,
         name: decoded.name,
+        userId: decoded.userId,
         profile,
         store,
         products
