@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
             const userId = user.id;
             const email = String(user?.store?.id);
             const accesToken = await createJoseToken(
-                { id: userId, email: email, name: user.name },
+                { id: userId, email: email, name: user.name }, //NOTED DI REFRESH TOKEN EMAIL IS STORE ID
                 '100s' 
              );
             return NextResponse.json({accesToken})
