@@ -35,6 +35,7 @@ type UserPayload = {
   name?: string;
   profile?: Profile;
   store?: Store;
+  products?: Product[];
 };
 
 type AuthContextType = {
