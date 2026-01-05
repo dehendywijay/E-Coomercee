@@ -16,9 +16,22 @@ type Store = {
   location  : string
 }
 
+type Product = {
+  name            : string
+  imageSrc        : string
+  stock         : bigint
+  originalPrice    : GLfloat
+  discountPercentage? : GLfloat
+  rating            : GLfloat
+  salesCount        : string
+  bonusText         : string
+  location     :    string
+  description : string
+}
+
 type UserPayload = {
   id: string;
-  email: string;
+  storeId: string; // storeId is stored in email field of token
   name?: string;
   profile?: Profile;
   store?: Store;
@@ -81,7 +94,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser({
         id: decoded.id,
-        email: decoded.email,
+        storeId: decoded.email,
         name: decoded.name,
         profile,
         store
