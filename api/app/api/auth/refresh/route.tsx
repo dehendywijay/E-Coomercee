@@ -1,5 +1,5 @@
 import { PrismaClient } from "@/app/generated/prisma/client";
-import { createJoseToken } from "@/lib/token";
+import {  createJoseTokenRefresh } from "@/lib/token";
 import { jwtVerify } from "jose";
 import { NextRequest, NextResponse } from "next/server"
 
@@ -30,13 +30,15 @@ export async function GET(req: NextRequest) {
         try {
             await jwtVerify(refreshToken,secret);
             const userId = user.id;
-            const email = String(user?.store?.id);
-            const accesToken = await createJoseToken(
-                { id: userId, email: email, name: user.name }, //NOTED DI REFRESH TOKEN EMAIL IS STORE ID
+            const email = user.email;
+            const storeId = user.store ? BigInt(user.store.id) : BigInt(0);
+            const accesToken = await createJoseTokenRefresh(
+                { id: userId, email: email, name: user.name, storeid: storeId }, 
                 '100s' 
              );
             return NextResponse.json({accesToken})
             
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         }catch(err){
             return NextResponse.json({
                 message : "Refresh token tidak valid",
