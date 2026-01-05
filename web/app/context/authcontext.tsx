@@ -95,6 +95,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (axios.isAxiosError(err) && err.response?.status === 404) {
           profile = undefined;
           store = undefined;
+          products = undefined;
         } else {
           throw err; 
         }
@@ -106,7 +107,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         storeId: decoded.email,
         name: decoded.name,
         profile,
-        store
+        store,
+        products
       });
     } catch (error) {
       console.error("error refreshToken:", error);
