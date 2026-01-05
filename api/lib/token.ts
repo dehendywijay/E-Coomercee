@@ -28,7 +28,7 @@ export async function createJoseRefreshToken(payload: { id: number; email: strin
     return token;
 }
 
-export async function createJoseTokenRefresh(payload: { id: number; email: string; name: string}, expiresIn: string): Promise<string> {
+export async function createJoseTokenRefresh(payload: { id: number; email: string; name: string, storeid: bigint}, expiresIn: string): Promise<string> {
  
     const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
     
