@@ -16,6 +16,8 @@ export async function GET(req: NextRequest) {
         const user = await prisma.user.findFirst({
             where:{
                 refreshToken : refreshToken
+            },include:{
+                store : true
             }
         });
         if(!user){
@@ -28,7 +30,7 @@ export async function GET(req: NextRequest) {
         try {
             await jwtVerify(refreshToken,secret);
             const userId = user.id;
-            const email = user.email;
+            const email = String(user?.store?.id);
             const accesToken = await createJoseToken(
                 { id: userId, email: email, name: user.name },
                 '100s' 
