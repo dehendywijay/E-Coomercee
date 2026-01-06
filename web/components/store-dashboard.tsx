@@ -21,11 +21,6 @@ export function StoreDashboard() {
   const store = user?.store;
   const products: Product[] = user?.products ?? [];
 
-  console.log("user", user);
-console.log("store", user?.store);
-console.log("productsFromUser", user?.products);
-console.log("productsFromStore");
-
   if (!store) {
     return (
       <div className="flex flex-col gap-4">

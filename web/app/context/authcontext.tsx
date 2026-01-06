@@ -16,6 +16,7 @@ type Store = {
 }
 
 type Product = {
+  id : string;
   name            : string
   imageSrc        : string
   stock         : number
