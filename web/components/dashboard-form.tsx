@@ -8,7 +8,7 @@ import { useAuth } from "@/app/context/authcontext";
 
 export function HomeForm() {
   const { user } = useAuth();
-  const products: Product[] = user?.products ?? [];
+  const products: Product[] = user?.allProducts ?? [];
 
   return (
     <section>
