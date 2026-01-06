@@ -1,5 +1,6 @@
 import { useAuth } from "@/app/context/authcontext";
 import { NavbarDefault } from "./navbar-form";
+import { useRouter } from "next/navigation";
 
 
 type Product = {
@@ -20,6 +21,7 @@ export function StoreDashboard() {
   const { user } = useAuth();
   const store = user?.store;
   const products: Product[] = user?.products ?? [];
+  const router = useRouter();
 
   if (!store) {
     return (
@@ -77,8 +79,9 @@ export function StoreDashboard() {
       <div className="border rounded-lg p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium text-sm">Daftar Produk</h3>
-          <button className="text-xs border rounded-md px-3 py-1 text-green-600">
+          <button className="text-xs border rounded-md px-3 py-1 text-green-600" onClick={() => router.push('/store/product')}>
             Tambah Produk
+            
           </button>
         </div>
 
