@@ -5,8 +5,16 @@ const prisma = new PrismaClient();
 
 export async function GET(req : NextRequest, res : NextResponse){
     try {
-        const body = await req.json();
-        const { name, imageSrc, originalPrice, discountPercentage, rating, salesCount, location, stock, description } = body;
+
+        const product = await prisma.store.findMany({
+        orderBy: {
+            id: 'desc'
+        },
+        select : {
+            products : true
+        }
+    });
+    return NextResponse.json({status: true, data: product});
     }catch (err) {
     
     console.error(err);
