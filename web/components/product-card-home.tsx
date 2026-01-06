@@ -32,12 +32,12 @@ export function ProductCard({ product }: ProductCardProps) {
       )}
 
       <div className="relative h-40 w-full bg-[#f5f5f5]">
-        <Image
+        {/* <Image
           src={product.imageSrc || "/placeholder.png"}
           alt={product.name || "Produk"}
           fill
           className="object-contain"
-        />
+        /> */}
       </div>
 
       <CardContent className="flex flex-1 flex-col gap-1 p-2 text-xs">
