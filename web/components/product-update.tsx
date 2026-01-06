@@ -5,6 +5,7 @@ import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "./ui/textarea";
+import { NavbarDefault } from "./navbar-form";
 type ProductFormValues = {
   id?: string; 
   name: string;
@@ -89,6 +90,8 @@ export function ProductForm({ mode, initialProduct, onSuccess }: ProductFormProp
   };
 
   return (
+    <main className="min-h-screen bg-gray-100">
+          <NavbarDefault/>
     <form
       onSubmit={handleSubmit}
       className="space-y-4 max-w-3xl mx-auto px-4 md:px-6 lg:px-8"
@@ -212,5 +215,6 @@ export function ProductForm({ mode, initialProduct, onSuccess }: ProductFormProp
           : "Simpan Perubahan"}
       </Button>
     </form>
+    </main>
   );
 }
