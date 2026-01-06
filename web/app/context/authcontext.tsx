@@ -117,8 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         store = storeRes.data;
         products = productRes.data[0].products;
         profile = profileRes.data;
-        console.log("productRes.data =", productRes.data[0].products);
-        console.log("al.data =", allProducts);
+      
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {
           profile = undefined;

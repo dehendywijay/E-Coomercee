@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "./ui/textarea";
 import { NavbarDefault } from "./navbar-form";
+import { toast } from "sonner";
 type ProductFormValues = {
   id?: string; 
   name: string;
@@ -61,7 +62,7 @@ export function ProductForm({ mode, initialProduct, onSuccess }: ProductFormProp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
+    let res;
     try {
       const respone = await axios.get("http://localhost:3001/api/auth/refresh", {
         withCredentials: true,
@@ -69,7 +70,7 @@ export function ProductForm({ mode, initialProduct, onSuccess }: ProductFormProp
       const accessToken = respone.data.accesToken
       setToken(accessToken);
       if (mode === "create") {
-        await axios.post("http://localhost:3001/api/store/product", form, {
+         res = await axios.post("http://localhost:3001/api/store/product", form, {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         });
@@ -82,8 +83,12 @@ export function ProductForm({ mode, initialProduct, onSuccess }: ProductFormProp
       }
 
       onSuccess?.();
+      if (res){
+        toast.success(res.data.message);
+      }
     } catch (err) {
       console.error("submit product error:", err);
+       toast.success("Produk gagal disimpan");
     } finally {
       setLoading(false);
     }
