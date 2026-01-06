@@ -23,7 +23,7 @@ export function StoreDashboard() {
 
   if (!store) {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <h2 className="font-semibold mb-3">Toko Saya</h2>
         <p className="text-sm text-gray-600">
           Kamu belum memiliki toko. Silakan buka toko terlebih dahulu.
@@ -40,8 +40,10 @@ export function StoreDashboard() {
 
   return (
     
-    <div className="flex flex-col gap-6">
-        <NavbarDefault/>
+    <main className="min-h-screen bg-gray-100">
+      <NavbarDefault/>
+    <div className="flex flex-col gap-6 max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+        
       <div className="flex items-center justify-between">
         <div>
           <h2 className="font-semibold text-lg">Dashboard Toko</h2>
@@ -112,5 +114,6 @@ export function StoreDashboard() {
         )}
       </div>
     </div>
+    </main>
   );
 }
