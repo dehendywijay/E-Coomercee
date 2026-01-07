@@ -1,17 +1,7 @@
-export type Product = {
-  id: string;
-  name: string;
-  imageSrc: string;
-  stock: number;
-  originalPrice: number;
-  discountPercentage?: number;
-  rating: number;
-  salesCount: string;
-  bonusText: string;
-  location: string;
-  description: string;
+import { Product } from "@/types/product";
+
+
+type PageProps = {
+  params: { slug: string };
 };
 
-type ProductCardProps = {
-  product: Product;
-};
