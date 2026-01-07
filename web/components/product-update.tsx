@@ -70,13 +70,13 @@ export function ProductForm({ mode, initialProduct, onSuccess }: ProductFormProp
       const accessToken = respone.data.accesToken
       setToken(accessToken);
       if (mode === "create") {
-         res = await axios.post("http://localhost:3001/api/store/product", form, {
+         res = await axios.post("http://localhost:3001/api/store/products", form, {
           headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         });
       } else {
         await axios.put(
-          `http://localhost:3001/api/store/product/${form.id}`,
+          `http://localhost:3001/api/store/products/${form.id}`,
           form,
           { withCredentials: true }
         );
