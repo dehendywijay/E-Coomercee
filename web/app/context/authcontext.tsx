@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import axios, { all } from "axios";
+import axios from "axios";
 type Profile = {
   id: string;
   address?: string;
@@ -89,25 +89,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     
       try{
         const profileRes = await axios.get(
-          `http://localhost:3001/api/user/profil/${decoded.id}`,{ 
+          `http://localhost:3001/api/user/profile/${decoded.id}`,{ 
             headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
           }
        );
        const storeRes = await axios.get(
-          `http://localhost:3001/api/store/akun/${decoded.id}`,{ 
+          `http://localhost:3001/api/store/account/${decoded.id}`,{ 
             headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
           }
        );
        const productRes = await axios.get(
-          `http://localhost:3001/api/store/product/${decoded.id}`,{ 
+          `http://localhost:3001/api/store/products/${decoded.id}`,{ 
             headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
           }
        );
        const allProductsRes = await axios.get(
-          `http://localhost:3001/api/product`,{ 
+          `http://localhost:3001/api/products`,{ 
             headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
           }
