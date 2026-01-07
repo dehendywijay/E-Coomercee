@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/api/user/profil/route.tss"  ],
+, "app/api/user/profile/route.tss"  ],
   "exclude": ["node_modules"]
 }

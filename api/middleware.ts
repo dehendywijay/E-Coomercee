@@ -4,14 +4,11 @@ import type { NextRequest } from 'next/server'
 import { jwtVerify } from 'jose';
 
 const PUBLIC_PATHS = [
-  '/api/login',
-  '/api/signup',
-  '/api/auth/refresh',
+  '/api/auth*',
 
 ];
 
-const AUTH_PROTECTED_MATCHERS = ['/api/user/profil*', '/api/store/akun*']; // yang wajib lewat accessToken
-
+const AUTH_PROTECTED_MATCHERS = ['/api/user/profile*', '/api/store/account*']; // yang wajib lewat accessToken
 
 function withCors(request: NextRequest, response?: NextResponse | Response) {
   const origin = request.headers.get('origin') || '*';
