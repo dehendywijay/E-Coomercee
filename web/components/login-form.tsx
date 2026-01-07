@@ -24,7 +24,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const handleLogin = async (e: React.FormEvent) => {
   e.preventDefault(); 
   try {
-      const res = await axios.post("http://localhost:3001/api/login", {
+      const res = await axios.post("http://localhost:3001/auth/api/login", {
       email,
       password,
     },{
