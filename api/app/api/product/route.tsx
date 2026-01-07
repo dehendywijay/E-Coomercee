@@ -10,11 +10,9 @@ export async function GET(req : NextRequest, res : NextResponse){
         orderBy: {
             id: 'desc'
         },
-        select : {
-            products : true
-        }
+        
     });
-    return NextResponse.json({status: true, data: product});
+    return NextResponse.json(product);
     }catch (err) {
     
     console.error(err);
