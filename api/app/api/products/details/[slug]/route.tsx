@@ -23,8 +23,11 @@ export const GET = async (res : NextResponse,
             location : true,
         }
     });
-
-
-
-
+    if (!product) {
+        return NextResponse.json(
+            { message: "Product tidak ditemukan" },
+            { status: 404 }
+        );
+    }
+    
 }
