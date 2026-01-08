@@ -8,7 +8,7 @@ const PUBLIC_PATHS = [
 
 ];
 
-const AUTH_PROTECTED_MATCHERS = ['/api/user/profile*', '/api/store/account*']; // yang wajib lewat accessToken
+const AUTH_PROTECTED_MATCHERS = ['/api/user/profile*', '/api/store/account*', '/api/products/details/*']; // yang wajib lewat accessToken
 
 function withCors(request: NextRequest, response?: NextResponse | Response) {
   const origin = request.headers.get('origin') || '*';
