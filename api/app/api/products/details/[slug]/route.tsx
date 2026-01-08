@@ -30,4 +30,9 @@ export const GET = async (res : NextResponse,
         );
     }
     
+    return NextResponse.json({ 
+        product, 
+        message: "Product di temukan",
+        status: 200
+    });   
 }
