@@ -20,6 +20,15 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const { productId } = body;
   
+    await prisma.profile.update({
+      where: { userId },
+      data: {
+        cartItems : {
+          connect: { id: Number(productId) }
+        }
+      },
+    });
+
     
 }
 
