@@ -29,6 +29,7 @@ export async function PUT(req: NextRequest) {
       },
     });
 
-    
+    if(!userId)return NextResponse.json({ message: "User tidak ditemukan" }, { status: 404 });
+    return NextResponse.json({ message: "Product Berhasil Ditambahkan" }, { status: 200 });
 }
 
