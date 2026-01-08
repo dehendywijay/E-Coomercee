@@ -41,7 +41,7 @@ model Profile {
   phone     String?  
   address   String? 
   birthDate DateTime? 
-  
+  cartItems  String[]
   userId    Int      @unique 
   
   user      User     @relation(fields: [userId], references: [id])

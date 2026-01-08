@@ -60,6 +60,7 @@ export type ProfileCountAggregateOutputType = {
   phone: number
   address: number
   birthDate: number
+  cartItems: number
   userId: number
   _all: number
 }
@@ -99,6 +100,7 @@ export type ProfileCountAggregateInputType = {
   phone?: true
   address?: true
   birthDate?: true
+  cartItems?: true
   userId?: true
   _all?: true
 }
@@ -195,6 +197,7 @@ export type ProfileGroupByOutputType = {
   phone: string | null
   address: string | null
   birthDate: Date | null
+  cartItems: string[]
   userId: number
   _count: ProfileCountAggregateOutputType | null
   _avg: ProfileAvgAggregateOutputType | null
@@ -227,6 +230,7 @@ export type ProfileWhereInput = {
   phone?: Prisma.StringNullableFilter<"Profile"> | string | null
   address?: Prisma.StringNullableFilter<"Profile"> | string | null
   birthDate?: Prisma.DateTimeNullableFilter<"Profile"> | Date | string | null
+  cartItems?: Prisma.StringNullableListFilter<"Profile">
   userId?: Prisma.IntFilter<"Profile"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -237,6 +241,7 @@ export type ProfileOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  cartItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -251,6 +256,7 @@ export type ProfileWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"Profile"> | string | null
   address?: Prisma.StringNullableFilter<"Profile"> | string | null
   birthDate?: Prisma.DateTimeNullableFilter<"Profile"> | Date | string | null
+  cartItems?: Prisma.StringNullableListFilter<"Profile">
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId">
 
@@ -260,6 +266,7 @@ export type ProfileOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  cartItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.ProfileCountOrderByAggregateInput
   _avg?: Prisma.ProfileAvgOrderByAggregateInput
@@ -277,6 +284,7 @@ export type ProfileScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Profile"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Profile"> | string | null
   birthDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Profile"> | Date | string | null
+  cartItems?: Prisma.StringNullableListFilter<"Profile">
   userId?: Prisma.IntWithAggregatesFilter<"Profile"> | number
 }
 
@@ -285,6 +293,7 @@ export type ProfileCreateInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
+  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
   user: Prisma.UserCreateNestedOneWithoutProfileInput
 }
 
@@ -294,6 +303,7 @@ export type ProfileUncheckedCreateInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
+  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
   userId: number
 }
 
@@ -302,6 +312,7 @@ export type ProfileUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
   user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
 }
 
@@ -311,6 +322,7 @@ export type ProfileUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -320,6 +332,7 @@ export type ProfileCreateManyInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
+  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
   userId: number
 }
 
@@ -328,6 +341,7 @@ export type ProfileUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
 }
 
 export type ProfileUncheckedUpdateManyInput = {
@@ -336,6 +350,7 @@ export type ProfileUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -344,12 +359,21 @@ export type ProfileNullableScalarRelationFilter = {
   isNot?: Prisma.ProfileWhereInput | null
 }
 
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type ProfileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthDate?: Prisma.SortOrder
+  cartItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -413,6 +437,10 @@ export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutUserInput, Prisma.ProfileUpdateWithoutUserInput>, Prisma.ProfileUncheckedUpdateWithoutUserInput>
 }
 
+export type ProfileCreatecartItemsInput = {
+  set: string[]
+}
+
 export type NullableEnumjenisKelaminFieldUpdateOperationsInput = {
   set?: $Enums.jenisKelamin | null
 }
@@ -421,11 +449,17 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type ProfileUpdatecartItemsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type ProfileCreateWithoutUserInput = {
   gender?: $Enums.jenisKelamin | null
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
+  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
 }
 
 export type ProfileUncheckedCreateWithoutUserInput = {
@@ -434,6 +468,7 @@ export type ProfileUncheckedCreateWithoutUserInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
+  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
 }
 
 export type ProfileCreateOrConnectWithoutUserInput = {
@@ -457,6 +492,7 @@ export type ProfileUpdateWithoutUserInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
 }
 
 export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -465,6 +501,7 @@ export type ProfileUncheckedUpdateWithoutUserInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
 }
 
 
@@ -475,6 +512,7 @@ export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   phone?: boolean
   address?: boolean
   birthDate?: boolean
+  cartItems?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
@@ -485,6 +523,7 @@ export type ProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   phone?: boolean
   address?: boolean
   birthDate?: boolean
+  cartItems?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
@@ -495,6 +534,7 @@ export type ProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   phone?: boolean
   address?: boolean
   birthDate?: boolean
+  cartItems?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
@@ -505,10 +545,11 @@ export type ProfileSelectScalar = {
   phone?: boolean
   address?: boolean
   birthDate?: boolean
+  cartItems?: boolean
   userId?: boolean
 }
 
-export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gender" | "phone" | "address" | "birthDate" | "userId", ExtArgs["result"]["profile"]>
+export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gender" | "phone" | "address" | "birthDate" | "cartItems" | "userId", ExtArgs["result"]["profile"]>
 export type ProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -530,6 +571,7 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     phone: string | null
     address: string | null
     birthDate: Date | null
+    cartItems: string[]
     userId: number
   }, ExtArgs["result"]["profile"]>
   composites: {}
@@ -960,6 +1002,7 @@ export interface ProfileFieldRefs {
   readonly phone: Prisma.FieldRef<"Profile", 'String'>
   readonly address: Prisma.FieldRef<"Profile", 'String'>
   readonly birthDate: Prisma.FieldRef<"Profile", 'DateTime'>
+  readonly cartItems: Prisma.FieldRef<"Profile", 'String[]'>
   readonly userId: Prisma.FieldRef<"Profile", 'Int'>
 }
     
