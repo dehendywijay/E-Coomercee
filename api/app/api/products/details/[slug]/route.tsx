@@ -21,8 +21,9 @@ export const GET = async (res : NextResponse,
             rating : true,
             salesCount : true,
             location : true,
-        }
+         }
     });
+    
     if (!product) {
         return NextResponse.json(
             { message: "Product tidak ditemukan" },
@@ -31,7 +32,7 @@ export const GET = async (res : NextResponse,
     }
     
     return NextResponse.json({ 
-        product, 
+        data : product,
         message: "Product di temukan",
         status: 200
     });   
