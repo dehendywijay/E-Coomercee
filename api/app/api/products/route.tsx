@@ -9,7 +9,9 @@ export async function GET(req : NextRequest, res : NextResponse){
         const product = await prisma.store.findMany({
         orderBy: {
             id: 'desc'
-        },
+        },select: {
+            products:true
+        }
         
     });
     return NextResponse.json(product);
