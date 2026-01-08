@@ -7,7 +7,7 @@ export const GET = async (res : NextResponse,
     ctx: { params: Promise<{ slug: string }> }) => {
     const { slug } = await ctx.params;
     
-    const product = await prisma.product.findMany({
+    const product = await prisma.product.findFirst({
         where : {
             id : Number(slug)
         },select : {
@@ -23,7 +23,7 @@ export const GET = async (res : NextResponse,
             location : true,
          }
     });
-    
+
     if (!product) {
         return NextResponse.json(
             { message: "Product tidak ditemukan" },
