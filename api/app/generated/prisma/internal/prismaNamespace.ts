@@ -765,7 +765,6 @@ export const ProfileScalarFieldEnum = {
   phone: 'phone',
   address: 'address',
   birthDate: 'birthDate',
-  cartItems: 'cartItems',
   userId: 'userId'
 } as const
 

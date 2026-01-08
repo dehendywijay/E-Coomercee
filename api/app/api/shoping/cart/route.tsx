@@ -1,9 +1,10 @@
 import { PrismaClient } from "@/app/generated/prisma/client";
-import { NextRequest } from "next/server";
+import { jwtVerify } from "jose";
+import { NextRequest, NextResponse } from "next/server";
 
 
 const prisma = new PrismaClient()
-const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+const secret = new TextEncoder().encode(process.env.REFRESH_TOKEN_SECRET!);
 
 async function getUserIdFromRequest(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
@@ -13,3 +14,12 @@ async function getUserIdFromRequest(req: NextRequest) {
   const { payload } = await jwtVerify(token, secret);
   return payload.id as number; 
 }
+
+export async function PUT(req: NextRequest) {
+    const userId = await getUserIdFromRequest(req);
+    const body = await req.json();
+    const { productId } = body;
+  
+    
+}
+

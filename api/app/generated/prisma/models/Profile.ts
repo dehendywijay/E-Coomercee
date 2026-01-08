@@ -60,7 +60,6 @@ export type ProfileCountAggregateOutputType = {
   phone: number
   address: number
   birthDate: number
-  cartItems: number
   userId: number
   _all: number
 }
@@ -100,7 +99,6 @@ export type ProfileCountAggregateInputType = {
   phone?: true
   address?: true
   birthDate?: true
-  cartItems?: true
   userId?: true
   _all?: true
 }
@@ -197,7 +195,6 @@ export type ProfileGroupByOutputType = {
   phone: string | null
   address: string | null
   birthDate: Date | null
-  cartItems: string[]
   userId: number
   _count: ProfileCountAggregateOutputType | null
   _avg: ProfileAvgAggregateOutputType | null
@@ -230,8 +227,8 @@ export type ProfileWhereInput = {
   phone?: Prisma.StringNullableFilter<"Profile"> | string | null
   address?: Prisma.StringNullableFilter<"Profile"> | string | null
   birthDate?: Prisma.DateTimeNullableFilter<"Profile"> | Date | string | null
-  cartItems?: Prisma.StringNullableListFilter<"Profile">
   userId?: Prisma.IntFilter<"Profile"> | number
+  cartItems?: Prisma.ProductListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -241,8 +238,8 @@ export type ProfileOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  cartItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  cartItems?: Prisma.ProductOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -256,7 +253,7 @@ export type ProfileWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"Profile"> | string | null
   address?: Prisma.StringNullableFilter<"Profile"> | string | null
   birthDate?: Prisma.DateTimeNullableFilter<"Profile"> | Date | string | null
-  cartItems?: Prisma.StringNullableListFilter<"Profile">
+  cartItems?: Prisma.ProductListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId">
 
@@ -266,7 +263,6 @@ export type ProfileOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  cartItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.ProfileCountOrderByAggregateInput
   _avg?: Prisma.ProfileAvgOrderByAggregateInput
@@ -284,7 +280,6 @@ export type ProfileScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Profile"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Profile"> | string | null
   birthDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Profile"> | Date | string | null
-  cartItems?: Prisma.StringNullableListFilter<"Profile">
   userId?: Prisma.IntWithAggregatesFilter<"Profile"> | number
 }
 
@@ -293,7 +288,7 @@ export type ProfileCreateInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
-  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
+  cartItems?: Prisma.ProductCreateNestedManyWithoutCartItemsInput
   user: Prisma.UserCreateNestedOneWithoutProfileInput
 }
 
@@ -303,8 +298,8 @@ export type ProfileUncheckedCreateInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
-  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
   userId: number
+  cartItems?: Prisma.ProductUncheckedCreateNestedManyWithoutCartItemsInput
 }
 
 export type ProfileUpdateInput = {
@@ -312,7 +307,7 @@ export type ProfileUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
+  cartItems?: Prisma.ProductUpdateManyWithoutCartItemsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
 }
 
@@ -322,8 +317,8 @@ export type ProfileUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  cartItems?: Prisma.ProductUncheckedUpdateManyWithoutCartItemsNestedInput
 }
 
 export type ProfileCreateManyInput = {
@@ -332,7 +327,6 @@ export type ProfileCreateManyInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
-  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
   userId: number
 }
 
@@ -341,7 +335,6 @@ export type ProfileUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
 }
 
 export type ProfileUncheckedUpdateManyInput = {
@@ -350,7 +343,6 @@ export type ProfileUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -359,21 +351,12 @@ export type ProfileNullableScalarRelationFilter = {
   isNot?: Prisma.ProfileWhereInput | null
 }
 
-export type StringNullableListFilter<$PrismaModel = never> = {
-  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
-  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
-  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  isEmpty?: boolean
-}
-
 export type ProfileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthDate?: Prisma.SortOrder
-  cartItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -403,6 +386,16 @@ export type ProfileMinOrderByAggregateInput = {
 export type ProfileSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+}
+
+export type ProfileListRelationFilter = {
+  every?: Prisma.ProfileWhereInput
+  some?: Prisma.ProfileWhereInput
+  none?: Prisma.ProfileWhereInput
+}
+
+export type ProfileOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ProfileCreateNestedOneWithoutUserInput = {
@@ -437,10 +430,6 @@ export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutUserInput, Prisma.ProfileUpdateWithoutUserInput>, Prisma.ProfileUncheckedUpdateWithoutUserInput>
 }
 
-export type ProfileCreatecartItemsInput = {
-  set: string[]
-}
-
 export type NullableEnumjenisKelaminFieldUpdateOperationsInput = {
   set?: $Enums.jenisKelamin | null
 }
@@ -449,9 +438,42 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type ProfileUpdatecartItemsInput = {
-  set?: string[]
-  push?: string | string[]
+export type ProfileCreateNestedManyWithoutCartItemsInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutCartItemsInput, Prisma.ProfileUncheckedCreateWithoutCartItemsInput> | Prisma.ProfileCreateWithoutCartItemsInput[] | Prisma.ProfileUncheckedCreateWithoutCartItemsInput[]
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutCartItemsInput | Prisma.ProfileCreateOrConnectWithoutCartItemsInput[]
+  connect?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+}
+
+export type ProfileUncheckedCreateNestedManyWithoutCartItemsInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutCartItemsInput, Prisma.ProfileUncheckedCreateWithoutCartItemsInput> | Prisma.ProfileCreateWithoutCartItemsInput[] | Prisma.ProfileUncheckedCreateWithoutCartItemsInput[]
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutCartItemsInput | Prisma.ProfileCreateOrConnectWithoutCartItemsInput[]
+  connect?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+}
+
+export type ProfileUpdateManyWithoutCartItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutCartItemsInput, Prisma.ProfileUncheckedCreateWithoutCartItemsInput> | Prisma.ProfileCreateWithoutCartItemsInput[] | Prisma.ProfileUncheckedCreateWithoutCartItemsInput[]
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutCartItemsInput | Prisma.ProfileCreateOrConnectWithoutCartItemsInput[]
+  upsert?: Prisma.ProfileUpsertWithWhereUniqueWithoutCartItemsInput | Prisma.ProfileUpsertWithWhereUniqueWithoutCartItemsInput[]
+  set?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  disconnect?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  delete?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  connect?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  update?: Prisma.ProfileUpdateWithWhereUniqueWithoutCartItemsInput | Prisma.ProfileUpdateWithWhereUniqueWithoutCartItemsInput[]
+  updateMany?: Prisma.ProfileUpdateManyWithWhereWithoutCartItemsInput | Prisma.ProfileUpdateManyWithWhereWithoutCartItemsInput[]
+  deleteMany?: Prisma.ProfileScalarWhereInput | Prisma.ProfileScalarWhereInput[]
+}
+
+export type ProfileUncheckedUpdateManyWithoutCartItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutCartItemsInput, Prisma.ProfileUncheckedCreateWithoutCartItemsInput> | Prisma.ProfileCreateWithoutCartItemsInput[] | Prisma.ProfileUncheckedCreateWithoutCartItemsInput[]
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutCartItemsInput | Prisma.ProfileCreateOrConnectWithoutCartItemsInput[]
+  upsert?: Prisma.ProfileUpsertWithWhereUniqueWithoutCartItemsInput | Prisma.ProfileUpsertWithWhereUniqueWithoutCartItemsInput[]
+  set?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  disconnect?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  delete?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  connect?: Prisma.ProfileWhereUniqueInput | Prisma.ProfileWhereUniqueInput[]
+  update?: Prisma.ProfileUpdateWithWhereUniqueWithoutCartItemsInput | Prisma.ProfileUpdateWithWhereUniqueWithoutCartItemsInput[]
+  updateMany?: Prisma.ProfileUpdateManyWithWhereWithoutCartItemsInput | Prisma.ProfileUpdateManyWithWhereWithoutCartItemsInput[]
+  deleteMany?: Prisma.ProfileScalarWhereInput | Prisma.ProfileScalarWhereInput[]
 }
 
 export type ProfileCreateWithoutUserInput = {
@@ -459,7 +481,7 @@ export type ProfileCreateWithoutUserInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
-  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
+  cartItems?: Prisma.ProductCreateNestedManyWithoutCartItemsInput
 }
 
 export type ProfileUncheckedCreateWithoutUserInput = {
@@ -468,7 +490,7 @@ export type ProfileUncheckedCreateWithoutUserInput = {
   phone?: string | null
   address?: string | null
   birthDate?: Date | string | null
-  cartItems?: Prisma.ProfileCreatecartItemsInput | string[]
+  cartItems?: Prisma.ProductUncheckedCreateNestedManyWithoutCartItemsInput
 }
 
 export type ProfileCreateOrConnectWithoutUserInput = {
@@ -492,7 +514,7 @@ export type ProfileUpdateWithoutUserInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
+  cartItems?: Prisma.ProductUpdateManyWithoutCartItemsNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -501,9 +523,114 @@ export type ProfileUncheckedUpdateWithoutUserInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cartItems?: Prisma.ProfileUpdatecartItemsInput | string[]
+  cartItems?: Prisma.ProductUncheckedUpdateManyWithoutCartItemsNestedInput
 }
 
+export type ProfileCreateWithoutCartItemsInput = {
+  gender?: $Enums.jenisKelamin | null
+  phone?: string | null
+  address?: string | null
+  birthDate?: Date | string | null
+  user: Prisma.UserCreateNestedOneWithoutProfileInput
+}
+
+export type ProfileUncheckedCreateWithoutCartItemsInput = {
+  id?: number
+  gender?: $Enums.jenisKelamin | null
+  phone?: string | null
+  address?: string | null
+  birthDate?: Date | string | null
+  userId: number
+}
+
+export type ProfileCreateOrConnectWithoutCartItemsInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutCartItemsInput, Prisma.ProfileUncheckedCreateWithoutCartItemsInput>
+}
+
+export type ProfileUpsertWithWhereUniqueWithoutCartItemsInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProfileUpdateWithoutCartItemsInput, Prisma.ProfileUncheckedUpdateWithoutCartItemsInput>
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutCartItemsInput, Prisma.ProfileUncheckedCreateWithoutCartItemsInput>
+}
+
+export type ProfileUpdateWithWhereUniqueWithoutCartItemsInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProfileUpdateWithoutCartItemsInput, Prisma.ProfileUncheckedUpdateWithoutCartItemsInput>
+}
+
+export type ProfileUpdateManyWithWhereWithoutCartItemsInput = {
+  where: Prisma.ProfileScalarWhereInput
+  data: Prisma.XOR<Prisma.ProfileUpdateManyMutationInput, Prisma.ProfileUncheckedUpdateManyWithoutCartItemsInput>
+}
+
+export type ProfileScalarWhereInput = {
+  AND?: Prisma.ProfileScalarWhereInput | Prisma.ProfileScalarWhereInput[]
+  OR?: Prisma.ProfileScalarWhereInput[]
+  NOT?: Prisma.ProfileScalarWhereInput | Prisma.ProfileScalarWhereInput[]
+  id?: Prisma.IntFilter<"Profile"> | number
+  gender?: Prisma.EnumjenisKelaminNullableFilter<"Profile"> | $Enums.jenisKelamin | null
+  phone?: Prisma.StringNullableFilter<"Profile"> | string | null
+  address?: Prisma.StringNullableFilter<"Profile"> | string | null
+  birthDate?: Prisma.DateTimeNullableFilter<"Profile"> | Date | string | null
+  userId?: Prisma.IntFilter<"Profile"> | number
+}
+
+export type ProfileUpdateWithoutCartItemsInput = {
+  gender?: Prisma.NullableEnumjenisKelaminFieldUpdateOperationsInput | $Enums.jenisKelamin | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
+}
+
+export type ProfileUncheckedUpdateWithoutCartItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.NullableEnumjenisKelaminFieldUpdateOperationsInput | $Enums.jenisKelamin | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type ProfileUncheckedUpdateManyWithoutCartItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.NullableEnumjenisKelaminFieldUpdateOperationsInput | $Enums.jenisKelamin | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+
+/**
+ * Count Type ProfileCountOutputType
+ */
+
+export type ProfileCountOutputType = {
+  cartItems: number
+}
+
+export type ProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cartItems?: boolean | ProfileCountOutputTypeCountCartItemsArgs
+}
+
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProfileCountOutputType
+   */
+  select?: Prisma.ProfileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeCountCartItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductWhereInput
+}
 
 
 export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -512,9 +639,10 @@ export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   phone?: boolean
   address?: boolean
   birthDate?: boolean
-  cartItems?: boolean
   userId?: boolean
+  cartItems?: boolean | Prisma.Profile$cartItemsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
 
 export type ProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -523,7 +651,6 @@ export type ProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   phone?: boolean
   address?: boolean
   birthDate?: boolean
-  cartItems?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
@@ -534,7 +661,6 @@ export type ProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   phone?: boolean
   address?: boolean
   birthDate?: boolean
-  cartItems?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
@@ -545,13 +671,14 @@ export type ProfileSelectScalar = {
   phone?: boolean
   address?: boolean
   birthDate?: boolean
-  cartItems?: boolean
   userId?: boolean
 }
 
-export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gender" | "phone" | "address" | "birthDate" | "cartItems" | "userId", ExtArgs["result"]["profile"]>
+export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gender" | "phone" | "address" | "birthDate" | "userId", ExtArgs["result"]["profile"]>
 export type ProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cartItems?: boolean | Prisma.Profile$cartItemsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -563,6 +690,7 @@ export type ProfileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Profile"
   objects: {
+    cartItems: Prisma.$ProductPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -571,7 +699,6 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     phone: string | null
     address: string | null
     birthDate: Date | null
-    cartItems: string[]
     userId: number
   }, ExtArgs["result"]["profile"]>
   composites: {}
@@ -967,6 +1094,7 @@ readonly fields: ProfileFieldRefs;
  */
 export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  cartItems<T extends Prisma.Profile$cartItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$cartItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1002,7 +1130,6 @@ export interface ProfileFieldRefs {
   readonly phone: Prisma.FieldRef<"Profile", 'String'>
   readonly address: Prisma.FieldRef<"Profile", 'String'>
   readonly birthDate: Prisma.FieldRef<"Profile", 'DateTime'>
-  readonly cartItems: Prisma.FieldRef<"Profile", 'String[]'>
   readonly userId: Prisma.FieldRef<"Profile", 'Int'>
 }
     
@@ -1397,6 +1524,30 @@ export type ProfileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Profiles to delete.
    */
   limit?: number
+}
+
+/**
+ * Profile.cartItems
+ */
+export type Profile$cartItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Product
+   */
+  select?: Prisma.ProductSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Product
+   */
+  omit?: Prisma.ProductOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductInclude<ExtArgs> | null
+  where?: Prisma.ProductWhereInput
+  orderBy?: Prisma.ProductOrderByWithRelationInput | Prisma.ProductOrderByWithRelationInput[]
+  cursor?: Prisma.ProductWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
 }
 
 /**
