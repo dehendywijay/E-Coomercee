@@ -41,7 +41,7 @@ model Profile {
   phone     String?  
   address   String? 
   birthDate DateTime? 
-  cartItems  String[]
+  cartItems  Product[] 
   userId    Int      @unique 
   
   user      User     @relation(fields: [userId], references: [id])
@@ -75,6 +75,7 @@ model Product {
 
   storeId           Int   
   store             Store     @relation(fields: [storeId], references: [id])
+  cartItems         Profile[]  @relation()
 }
 
 
