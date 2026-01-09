@@ -24,7 +24,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const handleLogin = async (e: React.FormEvent) => {
   e.preventDefault(); 
   try {
-      const res = await axios.post("http://localhost:3001/auth/api/login", {
+      const res = await axios.post("http://localhost:3001/api/auth/login", {
       email,
       password,
     },{
@@ -34,7 +34,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
     });
     console.log(res.data.message);
     if (res.data.status === true) {
-      const accesToken = res.data.token;
+      
       toast.success(res.data.message);
       router.push("/home");
     }else {
