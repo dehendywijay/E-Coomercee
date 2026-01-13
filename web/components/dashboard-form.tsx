@@ -3,7 +3,7 @@
 
 import { EmblaCarousel } from "./ui/embla";
 import { NavbarDefault } from "@/components/navbar-form";
-import { ProductCard, Product } from "./product-card-home";
+import { ProductCard, Product } from "./product/product-card-home";
 import { useAuth } from "@/app/context/authcontext";
 
 export function HomeForm() {

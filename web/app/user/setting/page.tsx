@@ -1,4 +1,4 @@
-import { ProfilePage } from '@/components/user-form'
+import { ProfilePage } from '@/components/user/user-form'
 import React from 'react'
 
 export default function page() {
