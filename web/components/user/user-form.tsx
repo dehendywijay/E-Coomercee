@@ -42,22 +42,22 @@ export  function ProfilePage() {
             </div>
             <div>
               <p className="text-sm text-gray-500">{user?.name}</p>
-              <p className="text-xs text-gray-400">PLUS •</p>
+              <p className="text-xs text-gray-400"></p>
             </div>
           </div>
 
           <div className="mt-4 space-y-3 text-sm">
             <div>
-              <p className="font-semibold">GoPay</p>
-              <button className="text-xs text-green-600">Aktifkan</button>
+              <p className="font-semibold"></p>
+              <button className="text-xs text-green-600"></button>
             </div>
             <div>
-              <p className="font-semibold">Tokopedia Card</p>
-              <button className="text-xs text-green-600">Daftar</button>
+              <p className="font-semibold"></p>
+              <button className="text-xs text-green-600"></button>
             </div>
             <div>
-              <p className="font-semibold">Saldo</p>
-              <p className="text-xs text-gray-500">Rp0</p>
+              <p className="font-semibold"></p>
+              <p className="text-xs text-gray-500"></p>
             </div>
           </div>
         </aside>
