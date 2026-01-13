@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Users\\Dehen\\E-Coomercee\\api\\app\\generated\\prisma",
+      "value": "C:\\Users\\msi\\Documents\\-ECOM\\E-Coomercee\\api\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -37,7 +37,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Dehen\\E-Coomercee\\api\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\msi\\Documents\\-ECOM\\E-Coomercee\\api\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../../prisma",
@@ -47,6 +47,7 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

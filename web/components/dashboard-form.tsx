@@ -3,8 +3,9 @@
 
 import { EmblaCarousel } from "./ui/embla";
 import { NavbarDefault } from "@/components/header/navbar-form";
-import { ProductCard, Product } from "./product/product-card-home";
+import { ProductCard } from "./product/product-card-home";
 import { useAuth } from "@/app/context/authcontext";
+import { Product } from "@/types/product"
 
 export function HomeForm() {
   const { user } = useAuth();

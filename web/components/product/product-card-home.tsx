@@ -3,20 +3,7 @@
 
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-
-export type Product = {
-  id: string;
-  name: string;
-  imageSrc: string;
-  stock: number;
-  originalPrice: number;
-  discountPercentage?: number;
-  rating: number;
-  salesCount: string;
-  bonusText: string;
-  location: string;
-  description: string;
-};
+import { Product } from "@/types/product"
 
 type ProductCardProps = {
   product: Product;
