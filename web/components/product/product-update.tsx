@@ -5,7 +5,7 @@ import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "../ui/textarea";
-import { NavbarDefault } from "./navbar-form";
+import { NavbarDefault } from "@/components/header/navbar-form";
 import { toast } from "sonner";
 type ProductFormValues = {
   id?: string; 

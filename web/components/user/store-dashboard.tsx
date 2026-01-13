@@ -1,5 +1,5 @@
 import { useAuth } from "@/app/context/authcontext";
-import { NavbarDefault } from "./navbar-form";
+import { NavbarDefault } from "@/components/header/navbar-form";
 import { useRouter } from "next/navigation";
 
 

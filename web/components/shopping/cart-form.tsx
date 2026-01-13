@@ -1,5 +1,5 @@
 // app/components/CartItem.tsx
-import { NavbarDefault } from "./navbar-form";
+import { NavbarDefault } from "@/components/header/navbar-form";
 
 type CartItemProps = {
   storeName: string;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { NavbarDefault } from "./navbar-form";
+import { NavbarDefault } from "@/components/header/navbar-form";
 import { useAuth } from "@/app/context/authcontext";
 import axios from "axios";
 

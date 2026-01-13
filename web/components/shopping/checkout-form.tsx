@@ -1,5 +1,5 @@
 // app/checkout/page.tsx
-import { NavbarDefault } from "../components/navbar-form";
+import { NavbarDefault } from "@/components/header/navbar-form";
 
 
 const address: Address = {

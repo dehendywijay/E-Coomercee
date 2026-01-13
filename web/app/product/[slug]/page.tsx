@@ -1,4 +1,4 @@
-import { NavbarDefault } from "@/components/navbar-form";
+import { NavbarDefault } from "@/components/header/navbar-form";
 
 type Product = {
   name: string;

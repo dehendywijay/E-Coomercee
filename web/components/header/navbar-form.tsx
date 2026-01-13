@@ -1,9 +1,8 @@
 "use client";
 
-import { Input } from './ui/input'
+import { Input } from '@/components/ui/input'
 import {  Bell, Mail, Menu, Search, ShoppingCart, User } from 'lucide-react';
-import { Button } from './ui/button';
-import { useState, useEffect } from "react"
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/app/context/authcontext';
 
 
