@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { api } from "@/lib/strings";
 type Profile = {
   id: string;
   address?: string;
@@ -52,6 +53,7 @@ type UserPayload = {
   store?: Store;
   products?: Product[];
   allProducts?: allProducts[];
+  productsDetails?: Product[];
 };
 
 type AuthContextType = {
@@ -86,6 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       let store: Store | undefined = undefined;
       let products: Product[] | undefined = undefined;
       let allProducts: allProducts[] | undefined = undefined;
+      let productsDetails: Product[] | undefined = undefined;
     
       try{
         const profileRes = await axios.get(
@@ -112,10 +115,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             withCredentials: true 
           }
        );
+       const productsDetailsRes = await axios.get(
+          `${api}/products/1`, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+            withCredentials: true 
+         }
+       )
         const raw = allProductsRes.data as { products: allProducts[] }[];
         allProducts = raw.flatMap((item) => item.products);
         store = storeRes.data;
         products = productRes.data[0].products;
+        productsDetails = productsDetailsRes.data;
         profile = profileRes.data;
       
       }catch(err){
@@ -138,7 +148,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         profile,
         store,
         products,
-        allProducts
+        allProducts,
+        productsDetails
       });
     } catch (error) {
       console.error("error refreshToken:", error);
