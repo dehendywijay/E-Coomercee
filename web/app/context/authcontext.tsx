@@ -3,58 +3,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/lib/strings";
-type Profile = {
-  id: string;
-  address?: string;
-  phone?: string;
-  gender?: string;
-  birthDate?: string;
-};
+import { Product, Profile, Store, User, UserPayload } from "@/types/type";
 
-type Store = {
-  name   :  string  
-  location  : string
-}
-type allProducts = {
-  id : string;
-  name            : string
-  imageSrc        : string
-  stock         : number
-  originalPrice    : number
-  discountPercentage? : number
-  rating            : number
-  salesCount        : string
-  bonusText         : string
-  location     :    string
-  description : string
-  store : string
-}
-
-type Product = {
-  id : string;
-  name            : string
-  imageSrc        : string
-  stock         : number
-  originalPrice    : number
-  discountPercentage? : number
-  rating            : number
-  salesCount        : string
-  bonusText         : string
-  location     :    string
-  description : string
-}
-
-type UserPayload = {
-  id: string;
-  email: string;
-  name?: string;
-  userId: string;
-  profile?: Profile;
-  store?: Store;
-  products?: Product[];
-  allProducts?: allProducts[];
-  productsDetails?: Product[];
-};
 
 type AuthContextType = {
   user: UserPayload | null;
@@ -87,10 +37,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       let profile: Profile | undefined = undefined;
       let store: Store | undefined = undefined;
       let products: Product[] | undefined = undefined;
-      let allProducts: allProducts[] | undefined = undefined;
-      let productsDetails: Product[] | undefined = undefined;
+      let productsDetails: Product | undefined = undefined;
+      let userProfile : User | undefined = undefined;
     
       try{
+        const userRes = await axios.get(
+          `http://localhost:3001/api/user/profile`,{ 
+            headers: { Authorization: `Bearer ${accessToken}` },
+            withCredentials: true 
+          }
+       );
         const profileRes = await axios.get(
           `http://localhost:3001/api/user/profile/${decoded.id}`,{ 
             headers: { Authorization: `Bearer ${accessToken}` },
@@ -121,8 +77,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             withCredentials: true 
          }
        )
-        const raw = allProductsRes.data as { products: allProducts[] }[];
-        allProducts = raw.flatMap((item) => item.products);
+
+        userProfile = userRes.data;
         store = storeRes.data;
         products = productRes.data[0].products;
         productsDetails = productsDetailsRes.data;
@@ -141,14 +97,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 
       setUser({
-        id: decoded.id,
-        email: decoded.email,
-        name: decoded.name,
+        user: userProfile,
         userId: decoded.userId,
         profile,
         store,
         products,
-        allProducts,
         productsDetails
       });
     } catch (error) {
