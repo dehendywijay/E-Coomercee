@@ -10,7 +10,11 @@ export async function GET(){
             id: 'asc'
         }   
     });
-    return NextResponse.json(product);
+     return NextResponse.json({ 
+        data : product,
+        message: "Product di temukan",
+        status: 200
+    });
     }catch (err) {
     
     console.error(err);
