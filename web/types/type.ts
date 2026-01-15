@@ -13,9 +13,9 @@ export type Product = {
 };
 
 export type User = {
-  id : number;
-  name: string;
-  email: string;
+  id? : number;
+  name?: string;
+  email?: string;
 }
 
 export type Profile = {
@@ -31,11 +31,3 @@ export type Store = {
   location  : string
 }
 
-export type UserPayload = {
-  user: User;
-  userId: string;
-  profile?: Profile;
-  store?: Store;
-  products?: Product[];
-  productsDetails?: Product;
-};

@@ -1,6 +1,6 @@
 import { useAuth } from "@/app/context/authcontext";
 import { NavbarDefault } from "@/components/header/navbar-form";
-import {Product} from "@/types/product";
+import {Product} from "@/types/type";
 
 // type Product = {
 //   name: string;

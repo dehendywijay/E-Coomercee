@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { Product } from "@/types/product"
+import { Product } from "@/types/type"
 
 type ProductCardProps = {
   product: Product;

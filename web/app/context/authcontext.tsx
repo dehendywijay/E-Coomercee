@@ -3,9 +3,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/lib/strings";
-import { Product, Profile, Store, User, UserPayload } from "@/types/type";
+import { Product, Profile, Store, User } from "@/types/type";
 
-
+ type UserPayload = {
+  user?: User;
+  userId?: string;
+  profile?: Profile;
+  store?: Store;
+  products?: Product[];
+  productsDetails?: Product;
+};
 type AuthContextType = {
   user: UserPayload | null;
   token: string;
