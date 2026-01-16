@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/lib/strings";
 
-type Profile = {
+interface Profile  {
   id: string;
   address?: string;
   phone?: string;
@@ -12,11 +12,26 @@ type Profile = {
   birthDate?: string;
 };
 
-type Store = {
+interface Store  {
   name   :  string  
   location  : string
 }
-type allProducts = {
+export interface allProducts  {
+  id : string;
+  name            : string
+  imageSrc        : string
+  stock         : number
+  originalPrice    : number
+  discountPercentage : number
+  rating            : number
+  salesCount        : string
+  bonusText         : string
+  location     :    string
+  description : string
+  storeId?: string
+}
+
+interface Product {
   id : string;
   name            : string
   imageSrc        : string
@@ -28,36 +43,21 @@ type allProducts = {
   bonusText         : string
   location     :    string
   description : string
-  store : string
 }
 
-type Product = {
-  id : string;
-  name            : string
-  imageSrc        : string
-  stock         : number
-  originalPrice    : number
-  discountPercentage? : number
-  rating            : number
-  salesCount        : string
-  bonusText         : string
-  location     :    string
-  description : string
-}
-
- type UserPayload = {
+ interface UserPayload  {
   id: string;
   email: string;
   name?: string;
   userId: string;
-  profile?: Profile;
-  store?: Store;
-  products?: Product[];
-  allProducts?: allProducts[];
-  productsDetails?: Product[];
+  profile: Profile | null;
+  store: Store | null;
+  products: Product[];             
+  allProducts: allProducts[];       
+  productsDetails: Product[];
 };
 
-type AuthContextType = {
+interface AuthContextType  {
   user: UserPayload | null;
   token: string;
   setUser: (u: UserPayload | null) => void;
@@ -74,6 +74,12 @@ const decodeJwtPayload = (token: string) => {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserPayload | null>(null);
   const [token, setToken] = useState("");
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [store, setStore] = useState<Store | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsDetails, setProductsDetails] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<allProducts[]>([]);
+;
 
   const refreshToken = async () => {
     try {
@@ -85,12 +91,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setToken(accessToken);
 
       const decoded = decodeJwtPayload(accessToken);
-      let profile: Profile | undefined = undefined;
-      let store: Store | undefined = undefined;
-      let products: Product[] | undefined = undefined;
-      let productsDetails: Product[] | undefined = undefined;
-      let allProducts: allProducts[] | undefined = undefined;
-    
       try{
         const profileRes = await axios.get(
           `http://localhost:3001/api/user/profile/${decoded.id}`,{ 
@@ -123,23 +123,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
          }
        )
 
-        allProducts = allProductsRes.data;
-        store = storeRes.data;
-        products = productRes.data[0].products;
-        productsDetails = productsDetailsRes.data;
-        profile = profileRes.data;
-      
+        setAllProducts(allProductsRes.data.data)
+        setStore(storeRes.data)
+        setProducts(productRes.data[0].products)
+        setProductsDetails(productsDetailsRes.data)
+        setProfile(profileRes.data)
       }catch(err){
-          if (axios.isAxiosError(err) && err.response?.status === 404) {
-          profile = undefined;
-          store = undefined;
-          products = undefined;
-          
+          if (axios.isAxiosError(err) && err.response?.status === 404) {  
         } else {
           throw err; 
         }
       }
-
 
       setUser({
         id: decoded.id,
@@ -149,7 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         profile,
         store,
         products,
-        productsDetails,
+        productsDetails ,
         allProducts
       });
     } catch (error) {
@@ -161,7 +155,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     refreshToken();
-  }, []);
+    
+  }, [allProducts, store, profile, products, productsDetails]);
 
   return (
     <AuthContext.Provider value={{ user, token, setUser }}>
