@@ -95,7 +95,7 @@ export default function Page({ params }: PageProps) {
                   {products.discountPercentage}%
                 </span>
                 <span className="text-sm text-gray-500 line-through">
-                  Rp{price().toLocaleString("id-ID")}
+                  Rp{products.originalPrice.toLocaleString("id-ID")}
                 </span>
               </div>
             </div>
