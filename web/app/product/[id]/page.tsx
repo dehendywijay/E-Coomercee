@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/app/context/authcontext";
 import { NavbarDefault } from "@/components/header/navbar-form";
-import {Product} from "@/types/type";
+import {Product} from "@/types/interface";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -36,13 +36,18 @@ export default function Page({ params }: PageProps) {
       
     }
   }
+    const price = (): number => {
+      if (!products) return 0;
+      if (!products.discountPercentage) return products.originalPrice;
+      const priceFinal = products.originalPrice - (products.originalPrice * products.discountPercentage) / 100;
+      return priceFinal;
+    };
     useEffect(() => {
       const run = async () => {
         await loadBarang();
       };
-  run();
-  console.log("s",id);
-    },[])
+      run();
+    }, [])
   return (
     <main className="min-h-screen bg-[#fafafa]">
       <NavbarDefault />
@@ -58,46 +63,53 @@ export default function Page({ params }: PageProps) {
 
         <section className="rounded-lg border border-gray-100 bg-white p-5 shadow-sm">
           <h1 className="text-lg font-semibold">{products?.name}</h1>
-          <p className="text-sm text-gray-600">{products?.description}</p>
+          
 
           <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
-            <span>Stok {products?.stock}.</span>
+            <span>Terjaul {products?.salesCount}.</span>
             <span className="text-gray-300">•</span>
             <span>{products?.rating}</span>
           </div>
-
-          <div className="mt-3 text-2xl font-semibold text-gray-900">
-            RP{products?.originalPrice}
-          </div>
+          
+            {products?.discountPercentage !=null 
+            ?<div className="mt-3 text-2xl font-semibold text-gray-900"> Rp{price().toLocaleString("id-ID")} 
+              <div>
+                <span className="mr-2 rounded bg-red-100 px-1.5 py-0.5 text-xs font-semibold text-red-600">
+                  {products.discountPercentage}%
+                </span>
+                <span className="text-sm text-gray-500 line-through">
+                  Rp{products?.originalPrice.toLocaleString("id-ID")}
+                </span>
+              </div>
+            </div>
+            : <div className="mt-3 text-2xl font-semibold text-gray-900"> Rp{price().toLocaleString("id-ID")} </div>
+            }
+          
 
           <div className="mt-4 flex gap-6 border-b border-gray-100 text-sm">
             <button className="border-b-2 border-emerald-500 pb-2 font-medium text-emerald-600">
               Detail Produk
             </button>
-            <button className="pb-2 text-gray-500">Spesifikasi</button>
-            <button className="pb-2 text-gray-500">Info Penting</button>
           </div>
 
           <div className="mt-3 space-y-1 text-sm">
             <div>
               <span className="text-gray-500">Kondisi:</span>{" "}
-              <span>{products?.name}</span>
+              <span>{products?.condition}</span>
             </div>
             <div>
               <span className="text-gray-500">Min. Pemesanan:</span>{" "}
               <span>1</span>
             </div>
             <div>
-              <span className="text-gray-500">Etalase:</span>{" "}
-              <span className="text-emerald-600">Kategore</span>
+              <span className="text-gray-500">Berat Satuan:</span>{" "}
+              <span className="text-emerald-600">{products?.unitWeight}</span>
             </div>
           </div>
 
-          {/* <ul className="mt-3 list-disc space-y-1 pl-5 text-sm">
-            {products?.specs.map((spec) => (
-              <li key={spec}>{spec}</li>
-            ))}
-          </ul> */}
+          <div className="mt-3 list-disc space-y-1 text-sm">
+            <p className="text-md text-black-600">{products?.description}</p>
+          </div>
         </section>
 
         <aside className="self-start">
@@ -122,7 +134,7 @@ export default function Page({ params }: PageProps) {
                 +
               </button>
               <span className="ml-auto text-xs text-gray-500">
-                Stok Total: Sisa 3
+                Stok Total: {products?.stock}
               </span>
             </div>
 
