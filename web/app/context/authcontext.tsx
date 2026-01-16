@@ -117,13 +117,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }
        );
        const productsDetailsRes = await axios.get(
-          `${api}/products/1`, {
+          `${api}/products/details/7`, {
             headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
          }
        )
-        const raw = allProductsRes.data as { products: allProducts[] }[];
-        allProducts = raw.flatMap((item) => item.products);
+
+        allProducts = allProductsRes.data;
         store = storeRes.data;
         products = productRes.data[0].products;
         productsDetails = productsDetailsRes.data;

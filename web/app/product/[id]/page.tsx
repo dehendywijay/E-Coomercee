@@ -1,12 +1,48 @@
+"use client"
+
 import { useAuth } from "@/app/context/authcontext";
 import { NavbarDefault } from "@/components/header/navbar-form";
 import {Product} from "@/types/type";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
 
-export default function Page({ params }: { params: { id: string } }) {
-  const { id } = params;
-  const {user} = useAuth();
-  const products : Product[] = user?.productsDetails?? [] ;
+export default function Page({ params }: PageProps) {
+  const { id } = React.use(params);
+  const [products, setProducts] = useState<Product | null>(null);
+  const [token, setToken ] = useState("");
+
+  const loadBarang = async () => {
+    try {
+      const token = await axios.get("http://localhost:3001/api/auth/refresh", {
+        withCredentials: true,
+      });
+      setToken(token.data.accesToken)
+
+      const response = await axios.get(
+        `http://localhost:3001/api/products/details/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        }
+      );
+      setProducts(response.data.data);
+      
+    } catch (error) {
+      console.error("Error ambil data:", error);
+      
+    }
+  }
+    useEffect(() => {
+      const run = async () => {
+        await loadBarang();
+      };
+  run();
+  console.log("s",id);
+    },[])
   return (
     <main className="min-h-screen bg-[#fafafa]">
       <NavbarDefault />
@@ -21,17 +57,17 @@ export default function Page({ params }: { params: { id: string } }) {
         </section>
 
         <section className="rounded-lg border border-gray-100 bg-white p-5 shadow-sm">
-          <h1 className="text-lg font-semibold">{products.name}</h1>
-          <p className="text-sm text-gray-600">{products.description}</p>
+          <h1 className="text-lg font-semibold">{products?.name}</h1>
+          <p className="text-sm text-gray-600">{products?.description}</p>
 
           <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
-            <span>{products.soldInfo}</span>
+            <span>{products?.rating}.</span>
             <span className="text-gray-300">•</span>
-            <span>{products.ratingInfo}</span>
+            <span>{products?.rating}</span>
           </div>
 
           <div className="mt-3 text-2xl font-semibold text-gray-900">
-            {products.price}
+            {products?.originalPrice}
           </div>
 
           <div className="mt-4 flex gap-6 border-b border-gray-100 text-sm">
@@ -45,23 +81,23 @@ export default function Page({ params }: { params: { id: string } }) {
           <div className="mt-3 space-y-1 text-sm">
             <div>
               <span className="text-gray-500">Kondisi:</span>{" "}
-              <span>{products.condition}</span>
+              <span>{products?.name}</span>
             </div>
             <div>
               <span className="text-gray-500">Min. Pemesanan:</span>{" "}
-              <span>{products.minOrder}</span>
+              <span>1</span>
             </div>
             <div>
               <span className="text-gray-500">Etalase:</span>{" "}
-              <span className="text-emerald-600">{products.category}</span>
+              <span className="text-emerald-600">Kategore</span>
             </div>
           </div>
 
-          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm">
-            {products.specs.map((spec) => (
+          {/* <ul className="mt-3 list-disc space-y-1 pl-5 text-sm">
+            {products?.specs.map((spec) => (
               <li key={spec}>{spec}</li>
             ))}
-          </ul>
+          </ul> */}
         </section>
 
         <aside className="self-start">
@@ -91,7 +127,7 @@ export default function Page({ params }: { params: { id: string } }) {
             </div>
 
             <div className="mt-3 text-xs text-gray-500">Subtotal</div>
-            <div className="text-lg font-semibold">{products.originalPrice}</div>
+            {/* <div className="text-lg font-semibold">{products.originalPrice}</div> */}
 
             <div className="mt-3 flex flex-col gap-2">
               <button className="rounded-lg bg-emerald-500 py-2 text-sm font-semibold text-white">

@@ -9,7 +9,7 @@ import { useAuth } from '@/app/context/authcontext';
 
 export function NavbarDefault(){
   const {user} = useAuth();
-  console.log("console",user?.store?.name);  
+  
   return (
      <header className="w-full border-b bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4 md:px-6 gap-4">
@@ -52,7 +52,7 @@ export function NavbarDefault(){
           >
             <User className="h-5 w-5" />
             <span className="hidden text-sm font-medium md:inline">
-             {user?.user?.name}
+             {user?.name}
             </span>
           </Button>
         </div>
