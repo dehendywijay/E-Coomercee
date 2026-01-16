@@ -3,47 +3,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/lib/strings";
+import { Product, Profile, Store } from "@/types/type";
+import { allProducts } from "@/types/interface";
 
-interface Profile  {
-  id: string;
-  address?: string;
-  phone?: string;
-  gender?: string;
-  birthDate?: string;
-};
-
-interface Store  {
-  name   :  string  
-  location  : string
-}
-export interface allProducts  {
-  id : string;
-  name            : string
-  imageSrc        : string
-  stock         : number
-  originalPrice    : number
-  discountPercentage : number
-  rating            : number
-  salesCount        : string
-  bonusText         : string
-  location     :    string
-  description : string
-  storeId?: string
-}
-
-interface Product {
-  id : string;
-  name            : string
-  imageSrc        : string
-  stock         : number
-  originalPrice    : number
-  discountPercentage? : number
-  rating            : number
-  salesCount        : string
-  bonusText         : string
-  location     :    string
-  description : string
-}
 
  interface UserPayload  {
   id: string;
@@ -53,7 +15,7 @@ interface Product {
   profile: Profile | null;
   store: Store | null;
   products: Product[];             
-  allProducts: allProducts[];       
+  allProducts: Product[];       
   productsDetails: Product[];
 };
 
@@ -78,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<Store | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [productsDetails, setProductsDetails] = useState<Product[]>([]);
-  const [allProducts, setAllProducts] = useState<allProducts[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
 ;
 
   const refreshToken = async () => {
