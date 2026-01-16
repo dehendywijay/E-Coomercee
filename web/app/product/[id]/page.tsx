@@ -2,39 +2,9 @@ import { useAuth } from "@/app/context/authcontext";
 import { NavbarDefault } from "@/components/header/navbar-form";
 import {Product} from "@/types/type";
 
-// type Product = {
-//   name: string;
-//   subtitle: string;
-//   price: string;
-//   soldInfo: string;
-//   ratingInfo: string;
-//   condition: string;
-//   minOrder: string;
-//   category: string;
-//   specs: string[];
-// };
 
-// const product: Product = {
-//   name: "Leadtek NVIDA QUADRO RTX 6000 ADA Generation",
-//   subtitle: "48GB GDDR6",
-//   price: "Rp214.449.000",
-//   soldInfo: "Terjual 3",
-//   ratingInfo: "5 (1 rating)",
-//   condition: "Baru",
-//   minOrder: "1 Buah",
-//   category: "Graphic Card GPU",
-//   specs: [
-//     "NVIDIA RTX 6000 Ada Generation",
-//     "Ada Lovelace GPU architecture",
-//     "18,176 CUDA Cores",
-//     "568 Tensor Cores",
-//     "142 RT Cores",
-//     "48GB GDDR6 Memory with ECC",
-//     "Memory Bandwidth: 960 GB/s"
-//   ]
-// };
-
-export default function ProductPage() {
+export default function Page({ params }: { params: { id: string } }) {
+  const { id } = params;
   const {user} = useAuth();
   const products : Product[] = user?.productsDetails?? [] ;
   return (
