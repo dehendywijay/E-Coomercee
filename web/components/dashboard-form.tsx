@@ -4,8 +4,8 @@
 import { EmblaCarousel } from "./ui/embla";
 import { NavbarDefault } from "@/components/header/navbar-form";
 import { ProductCard } from "./product/product-card-home";
-import { allProducts, useAuth } from "@/app/context/authcontext";
-import { useEffect, useState } from "react";
+import { useAuth } from "@/app/context/authcontext";
+
 
 export function HomeForm() {
   const { user } = useAuth();
@@ -13,11 +13,9 @@ export function HomeForm() {
   ? user.allProducts
   : [];
 
-
   return (
     <section>
       <NavbarDefault />
-
       <section className="max-w-6xl mx-auto px-6 mt-3">
         <EmblaCarousel />
       </section>
