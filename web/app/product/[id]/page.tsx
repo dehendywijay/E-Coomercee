@@ -61,13 +61,13 @@ export default function Page({ params }: PageProps) {
           <p className="text-sm text-gray-600">{products?.description}</p>
 
           <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
-            <span>{products?.rating}.</span>
+            <span>Stok {products?.stock}.</span>
             <span className="text-gray-300">•</span>
             <span>{products?.rating}</span>
           </div>
 
           <div className="mt-3 text-2xl font-semibold text-gray-900">
-            {products?.originalPrice}
+            RP{products?.originalPrice}
           </div>
 
           <div className="mt-4 flex gap-6 border-b border-gray-100 text-sm">
