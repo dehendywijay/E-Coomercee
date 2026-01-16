@@ -24,6 +24,7 @@ enum jenisKelamin {
   PEREMPUAN
 }
 
+
 model User{
   id        Int      @id @default(autoincrement())
   email     String   @unique
@@ -64,19 +65,23 @@ model Product {
   name              String
   imageSrc          String
   stock             Int
-  originalPrice     Float?
+  originalPrice     Float
   discountPercentage Float?
-  rating            Float
+  rating            Float    @default(0)
   salesCount        String
   bonusText         String?
   location          String
-  description       String?
+  description       String
+  condition         String?
+  unitWeight        String?
+  sold              Int?     @default(0)
   
 
   storeId           Int   
   store             Store     @relation(fields: [storeId], references: [id])
   cartItems         Profile[]  @relation()
 }
+
 
 
 
