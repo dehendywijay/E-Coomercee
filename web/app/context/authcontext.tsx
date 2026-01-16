@@ -4,8 +4,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/lib/strings";
 import { Product, Profile, Store } from "@/types/type";
-import { allProducts } from "@/types/interface";
-
 
  interface UserPayload  {
   id: string;
