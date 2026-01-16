@@ -4,13 +4,17 @@
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Product } from "@/types/type"
+import { useRouter } from "next/navigation";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter();
   return (
+    <section onClick={() => router.push(`/product/${product.id}`)}
+      className="cursor-pointer">
     <Card className="relative flex h-full max-w-[300px] flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
       {product.name && (
         <div className="absolute left-0 top-0 z-10 rounded-br-lg bg-red-500 px-2 py-1 text-xs font-semibold text-white">
@@ -51,5 +55,6 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </CardContent>
     </Card>
+    </section>
   );
 }

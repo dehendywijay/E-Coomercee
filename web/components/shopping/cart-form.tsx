@@ -34,7 +34,7 @@ export function CartItem() {
           </div>
           <button
             type="button"
-            className="text-xs text-red-500"
+            className="text-xs text-green-500"
           >
             Hapus
           </button>
