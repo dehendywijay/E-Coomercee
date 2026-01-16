@@ -17,10 +17,10 @@ export default function Page({ params }: PageProps) {
 
   const loadBarang = async () => {
     try {
-      const token = await axios.get("http://localhost:3001/api/auth/refresh", {
+      const stoken = await axios.get("http://localhost:3001/api/auth/refresh", {
         withCredentials: true,
       });
-      setToken(token.data.accesToken)
+      setToken(stoken.data.accesToken)
 
       const response = await axios.get(
         `http://localhost:3001/api/products/details/${id}`,
@@ -36,6 +36,23 @@ export default function Page({ params }: PageProps) {
       
     }
   }
+  const handleCheckout = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/shoping/cart`,{
+          productId: id
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        }
+      );
+      console.log(response.status);
+    } catch (error) {
+      console.error("tambah data:", error);
+    }
+  };
+  
     const price = (): number => {
       if (!products) return 0;
       if (!products.discountPercentage) return products.originalPrice;
@@ -142,7 +159,7 @@ export default function Page({ params }: PageProps) {
             <div className="text-lg font-semibold">{price().toLocaleString("id-ID")}</div>
 
             <div className="mt-3 flex flex-col gap-2">
-              <button className="rounded-lg bg-emerald-500 py-2 text-sm font-semibold text-white">
+              <button className="rounded-lg bg-emerald-500 py-2 text-sm font-semibold text-white" onClick={handleCheckout}>
                 + Keranjang
               </button>
               <button className="rounded-lg border border-emerald-500 py-2 text-sm font-semibold text-emerald-500">
