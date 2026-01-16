@@ -78,7 +78,7 @@ export default function Page({ params }: PageProps) {
                   {products.discountPercentage}%
                 </span>
                 <span className="text-sm text-gray-500 line-through">
-                  Rp{products?.originalPrice.toLocaleString("id-ID")}
+                  Rp{price().toLocaleString("id-ID")}
                 </span>
               </div>
             </div>
@@ -139,7 +139,7 @@ export default function Page({ params }: PageProps) {
             </div>
 
             <div className="mt-3 text-xs text-gray-500">Subtotal</div>
-            {/* <div className="text-lg font-semibold">{products.originalPrice}</div> */}
+            <div className="text-lg font-semibold">{price().toLocaleString("id-ID")}</div>
 
             <div className="mt-3 flex flex-col gap-2">
               <button className="rounded-lg bg-emerald-500 py-2 text-sm font-semibold text-white">
