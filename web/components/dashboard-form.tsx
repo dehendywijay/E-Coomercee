@@ -4,12 +4,15 @@
 import { EmblaCarousel } from "./ui/embla";
 import { NavbarDefault } from "@/components/header/navbar-form";
 import { ProductCard } from "./product/product-card-home";
-import { useAuth } from "@/app/context/authcontext";
-import { Product } from "@/types/type"
+import { allProducts, useAuth } from "@/app/context/authcontext";
+import { useEffect, useState } from "react";
 
 export function HomeForm() {
   const { user } = useAuth();
-  const products: Product[] = user?.allProducts ?? [];
+  const products = Array.isArray(user?.allProducts)
+  ? user.allProducts
+  : [];
+
 
   return (
     <section>
@@ -24,8 +27,8 @@ export function HomeForm() {
           <h2 className="mb-3 text-base font-semibold">Untukmu</h2>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {products.map((products) => (
+              <ProductCard key={products.id} product={products} />
             ))}
           </div>
         </div>
