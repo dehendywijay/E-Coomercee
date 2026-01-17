@@ -20,16 +20,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-
-
-// const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-//     const { data, error, isLoading, mutate } = useSWR(
-//     "http://localhost:3001/signup/api",
-//     fetcher
-//   );
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,102 +28,129 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
-  e.preventDefault(); 
-  try {
-      const res = await axios.post("http://localhost:3001/auth/api/signup", {
-      name,
-      email,
-      password,
-      confirmPassword
-    });
-    if (res.data.status === true) {
-      toast.success(res.data.message);
-      router.push("/login");
-    }else {
-      toast.success(res.data.message);
+    e.preventDefault(); 
+    try {
+        const res = await axios.post("http://localhost:3001/auth/api/signup", {
+        name,
+        email,
+        password,
+        confirmPassword
+      });
+      if (res.data.status === true) {
+        toast.success(res.data.message);
+        router.push("/login");
+      }else {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
-    
-  } catch (error) {
-    console.error();
-  }
-};
+  };
 
-return (
-    <Card {...props}>
-      <CardHeader>
-        <CardTitle className="text-center text-2xl">
-          Create an account
-        </CardTitle>
-        <CardDescription className="text-center">
-          Enter your information below to create your account
+  return (
+    <Card className="w-full max-w-sm mx-auto shadow-lg border-0 bg-white" {...props}>
+      <CardHeader className="text-center space-y-2 pb-8">
+        <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto shadow-md mb-4">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </div>
+        <CardTitle className="text-2xl font-bold text-gray-900">Buat Akun Baru</CardTitle>
+        <CardDescription className="text-gray-600 font-medium">
+          Isi informasi di bawah untuk membuat akun Anda
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-6">
         <form onSubmit={handleSignup}>
-          <FieldGroup>
+          <div className="space-y-4">
             <Field>
-              <FieldLabel htmlFor="name">Full Name</FieldLabel>
+              <FieldLabel htmlFor="name" className="text-sm font-semibold text-gray-700">
+                Nama Lengkap
+              </FieldLabel>
               <Input
                 id="name"
                 type="text"
-                placeholder="Dehendy"
+                placeholder="Nama Lengkap Anda"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                className="h-12 text-lg border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
                 required
               />
             </Field>
+            
             <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <FieldLabel htmlFor="email" className="text-sm font-semibold text-gray-700">
+                Email
+              </FieldLabel>
               <Input
                 id="email"
                 type="email"
-                placeholder="cukurukuk@example.com"
+                placeholder="contoh@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="h-12 text-lg border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
                 required
               />
-              <FieldDescription>
-                We&apos;ll use this to contact you. We will not share your email
-                with anyone else.
+              <FieldDescription className="text-xs text-gray-500">
+                Kami akan gunakan ini untuk menghubungi Anda
               </FieldDescription>
             </Field>
+            
             <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input 
-              id="password" 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required />
-              <FieldDescription>
-                Must be at least 8 characters long.
-              </FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="confirm-password">
-                Confirm Password
+              <FieldLabel htmlFor="password" className="text-sm font-semibold text-gray-700">
+                Kata Sandi
               </FieldLabel>
               <Input 
-              id="confirm-password" 
-              type="password" 
-              value={confirmPassword}
-              onChange={(e) => setconfirmPassword(e.target.value)}
-              required />
-              <FieldDescription>Please confirm your password.</FieldDescription>
+                id="password" 
+                type="password" 
+                placeholder="Minimal 8 karakter"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="h-12 text-lg border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                required 
+              />
+              <FieldDescription className="text-xs text-gray-500">
+                Minimal 8 karakter
+              </FieldDescription>
             </Field>
-            <FieldGroup>
-              <Field>
-                <Button type="submit" variant="outline" >Create Account</Button>
-                
-                <Button variant="outline" type="submit">
-                  Sign up with Google
-                </Button>
-                <FieldDescription className="px-6 text-center">
-                  Already have an account? <a href="/login">Log in</a>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-          </FieldGroup>
+            
+            <Field>
+              <FieldLabel htmlFor="confirm-password" className="text-sm font-semibold text-gray-700">
+                Konfirmasi Kata Sandi
+              </FieldLabel>
+              <Input 
+                id="confirm-password" 
+                type="password" 
+                placeholder="Ulangi kata sandi"
+                value={confirmPassword}
+                onChange={(e) => setconfirmPassword(e.target.value)}
+                className="h-12 text-lg border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                required 
+              />
+            </Field>
+            
+            <Button 
+              type="submit" 
+              className="w-full h-12 text-lg font-semibold bg-emerald-600 hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-200/50 shadow-md transition-all duration-200"
+            >
+              Buat Akun
+            </Button>
+            
+            <div className="pt-4">
+              <Button variant="outline" className="w-full h-12 border-emerald-200 hover:border-emerald-300 hover:bg-emerald-50 text-emerald-700 font-medium shadow-sm">
+                Daftar dengan Google
+              </Button>
+            </div>
+            
+            <div className="text-center pt-4">
+              <p className="text-xs text-gray-600">
+                Sudah punya akun?{' '}
+                <a href="/login" className="text-emerald-600 hover:text-emerald-700 font-medium hover:underline">
+                  Masuk sekarang
+                </a>
+              </p>
+            </div>
+          </div>
         </form>
       </CardContent>
     </Card>
