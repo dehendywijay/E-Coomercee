@@ -4,10 +4,11 @@ import { Input } from '@/components/ui/input'
 import { Bell, Mail, Menu, Search, ShoppingCart, User, Package, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/app/context/authcontext';
+import { useRouter } from "next/navigation";
 
 export function NavbarDefault(){
   const {user} = useAuth();
-  
+  const router = useRouter();
   return (
     <header className="w-full border-b bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4 md:px-6 gap-4">
@@ -80,6 +81,7 @@ export function NavbarDefault(){
           variant="ghost"
           className="flex items-center gap-2 px-3 py-2 h-10 shadow-sm hover:shadow-md hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition-all duration-200 border border-emerald-100 hover:border-emerald-200"
           aria-label="Profil Pengguna"
+          onClick={() => router.push("/user/setting")}
         >
           <User className="h-5 w-5 flex-shrink-0" />
           <div className="hidden md:flex flex-col items-start text-left leading-tight">
