@@ -14,7 +14,7 @@ import { Product, Profile, Store } from "@/types/type";
   store: Store | null;
   products: Product[];             
   allProducts: Product[];
-  checkoutProduct : Product[];      
+  cartProduct : Product[];      
 };
 
 interface AuthContextType  {
@@ -39,7 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<Store | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [checkoutProduct, setCheckoutProduct] = useState<Product[]>([]);
+  const [cartProduct, setCartProduct] = useState<Product[]>([]);
 
   const refreshToken = async () => {
     try {
@@ -87,7 +87,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setStore(storeRes.data)
         setProducts(productRes.data[0].products)
         setProfile(profileRes.data)
-        setCheckoutProduct(checkoutProductRes.data)
+        setCartProduct(checkoutProductRes.data)
 
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {  
@@ -105,7 +105,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         store,
         products,
         allProducts,
-        checkoutProduct
+        cartProduct
       });
     } catch (error) {
       console.error("error refreshToken:", error);
