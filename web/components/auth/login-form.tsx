@@ -54,8 +54,8 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           Masukkan email dan kata sandi Anda
         </CardDescription>
         <CardAction className="justify-center pt-4">
-          <Button variant="ghost" className="text-sm text-gray-600 hover:text-emerald-600 font-medium">
-            Belum punya akun? <span className="font-semibold">Daftar</span>
+          <Button variant="ghost" className="text-sm text-gray-600 hover:text-emerald-600 font-medium" onClick={() => router.push("/signup")}>
+            Belum punya akun? <span className="font-semibold" >Daftar</span>
           </Button>
         </CardAction>
       </CardHeader>
