@@ -13,15 +13,10 @@ interface PageProps {
 export default function Page({ params }: PageProps) {
   const { id } = React.use(params);
   const [products, setProducts] = useState<Product | null>(null);
-  const [token, setToken ] = useState("");
+  const { token } = useAuth();
 
   const loadBarang = async () => {
     try {
-      const stoken = await axios.get("http://localhost:3001/api/auth/refresh", {
-        withCredentials: true,
-      });
-      setToken(stoken.data.accesToken)
-
       const response = await axios.get(
         `http://localhost:3001/api/products/details/${id}`,
         {
@@ -64,7 +59,7 @@ export default function Page({ params }: PageProps) {
         await loadBarang();
       };
       run();
-    }, [])
+    }, [token])
   return (
     <main className="min-h-screen bg-[#fafafa]">
       <NavbarDefault />
