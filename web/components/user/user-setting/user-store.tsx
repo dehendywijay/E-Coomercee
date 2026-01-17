@@ -1,10 +1,33 @@
 import { useAuth } from "@/app/context/authcontext";
 import { Row } from "../user-form";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export function StoreSection() {
    const { user } = useAuth();
-
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
   const hasStore = !!user?.store; 
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault(); 
+  try {
+      const res = await axios.post("http://localhost:3001/api/store/account", {
+        name,
+        location,
+        buka : "YA"
+      });
+    if (res.data.status === true) {
+      toast.success(res.data.message);
+    }else {
+      toast.success(res.data.message);
+    }
+    
+  } catch (error) {
+    console.error();
+  }
+};
 
   return (
     <div className="flex flex-col gap-4">
