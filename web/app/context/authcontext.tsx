@@ -13,7 +13,8 @@ import { Product, Profile, Store } from "@/types/type";
   profile: Profile | null;
   store: Store | null;
   products: Product[];             
-  allProducts: Product[];       
+  allProducts: Product[];
+  checkoutProduct : Product[];      
 };
 
 interface AuthContextType  {
@@ -38,7 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<Store | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-;
+  const [checkoutProduct, setCheckoutProduct] = useState<Product[]>([]);
 
   const refreshToken = async () => {
     try {
@@ -75,11 +76,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             withCredentials: true 
           }
        );
-  
+       const checkoutProductRes = await axios.get(
+          `http://localhost:3001/api/products`,{ 
+            headers: { Authorization: `Bearer ${accessToken}` },
+            withCredentials: true 
+          }
+       );
+
         setAllProducts(allProductsRes.data.data)
         setStore(storeRes.data)
         setProducts(productRes.data[0].products)
         setProfile(profileRes.data)
+        setCheckoutProduct(checkoutProductRes.data)
+
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {  
         } else {
@@ -95,7 +104,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         profile,
         store,
         products,
-        allProducts
+        allProducts,
+        checkoutProduct
       });
     } catch (error) {
       console.error("error refreshToken:", error);
@@ -106,7 +116,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => { 
     refreshToken();
-  });
+  },[ ]);
 
   return (
     <AuthContext.Provider value={{ user, token, setUser, setToken }}>
