@@ -77,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }
        );
        const checkoutProductRes = await axios.get(
-          `http://localhost:3001/api/products`,{ 
+          `http://localhost:3001/api/shoping/cart`,{ 
             headers: { Authorization: `Bearer ${accessToken}` },
             withCredentials: true 
           }
