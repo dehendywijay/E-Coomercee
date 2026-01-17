@@ -88,7 +88,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setProducts(productRes.data[0].products)
         setProfile(profileRes.data)
         setCartProduct(checkoutProductRes.data)
-
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {  
         } else {
@@ -116,7 +115,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => { 
     refreshToken();
-  },[ ]);
+  },[]);
 
   return (
     <AuthContext.Provider value={{ user, token, setUser, setToken }}>
