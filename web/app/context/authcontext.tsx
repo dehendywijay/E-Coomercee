@@ -14,13 +14,13 @@ import { Product, Profile, Store } from "@/types/type";
   store: Store | null;
   products: Product[];             
   allProducts: Product[];       
-  productsDetails: Product[];
 };
 
 interface AuthContextType  {
   user: UserPayload | null;
   token: string;
   setUser: (u: UserPayload | null) => void;
+  setToken: (t: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -37,7 +37,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [store, setStore] = useState<Store | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
-  const [productsDetails, setProductsDetails] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 ;
 
@@ -76,17 +75,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             withCredentials: true 
           }
        );
-       const productsDetailsRes = await axios.get(
-          `${api}/products/details/7`, {
-            headers: { Authorization: `Bearer ${accessToken}` },
-            withCredentials: true 
-         }
-       )
-
+  
         setAllProducts(allProductsRes.data.data)
         setStore(storeRes.data)
         setProducts(productRes.data[0].products)
-        setProductsDetails(productsDetailsRes.data)
         setProfile(profileRes.data)
       }catch(err){
           if (axios.isAxiosError(err) && err.response?.status === 404) {  
@@ -103,7 +95,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         profile,
         store,
         products,
-        productsDetails ,
         allProducts
       });
     } catch (error) {
@@ -113,13 +104,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     refreshToken();
-    
-  }, [allProducts, store, profile, products, productsDetails]);
+  });
 
   return (
-    <AuthContext.Provider value={{ user, token, setUser }}>
+    <AuthContext.Provider value={{ user, token, setUser, setToken }}>
       {children}
     </AuthContext.Provider>
   );
