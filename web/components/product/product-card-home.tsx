@@ -45,7 +45,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="flex items-center gap-1 text-[11px] text-gray-600">
           <span>⭐ {product.rating ?? "-"}</span>
           <span className="mx-1 text-gray-400">•</span>
-          <span>{product.salesCount ?? "-"}</span>
+          <span>{"Stok: " + product.stock ?? "-"}</span>
         </div>
 
         <div className="mt-1 flex items-center gap-1 text-[10px] text-green-600">
