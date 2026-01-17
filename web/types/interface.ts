@@ -24,6 +24,7 @@ export interface Product {
   location     :    string
   description : string
   storeId?: string
+  store? : Store
   condition?: string
   unitWeight?: string
   sold?: number
