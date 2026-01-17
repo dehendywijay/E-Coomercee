@@ -115,7 +115,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => { 
     refreshToken();
-  },[]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, token, setUser, setToken }}>
