@@ -3,8 +3,10 @@ import { Row } from "../user-form";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/dist/client/components/navigation";
 
 export function StoreSection() {
+  const router = useRouter();
    const { user } = useAuth();
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -58,7 +60,7 @@ export function StoreSection() {
             </div>
           </div>
 
-          <button className="mt-4 w-full md:w-48 text-sm border rounded-md py-2 text-green-600">
+          <button className="mt-4 w-full md:w-48 text-sm border rounded-md py-2 text-green-600" onClick={() => router.push("/store")}>
             Kelola Toko
           </button>
         </>
