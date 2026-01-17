@@ -22,16 +22,22 @@ export function NavbarDefault(){
             <Menu className="h-5 w-5" />
           </Button>
         </div>
-
+        <Button
+          type="button"
+          variant="ghost"
+          className="flex items-center gap-2 px-3 py-2 h-10 shadow-sm hover:shadow-md hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition-all duration-200 border border-emerald-100 hover:border-emerald-200"
+          aria-label="Profil Pengguna"
+          onClick={() => router.push("/home")}
+        >
         <div className="flex items-center gap-2 mr-4">
           <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-md">
-            <Package className="h-5 w-5 text-white" />
+            <Package className="h-5 w-5 text-white"  />
           </div>
           <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
             ecoomercee
           </span>
         </div>
-
+        </Button>
         <div className="flex-1 max-w-2xl">
           <div className="relative">
             <Search 
