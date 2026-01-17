@@ -795,6 +795,9 @@ export const ProductScalarFieldEnum = {
   bonusText: 'bonusText',
   location: 'location',
   description: 'description',
+  condition: 'condition',
+  unitWeight: 'unitWeight',
+  sold: 'sold',
   storeId: 'storeId'
 } as const
 

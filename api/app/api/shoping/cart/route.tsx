@@ -33,3 +33,17 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ message: "Product Berhasil Ditambahkan" }, { status: 200 });
 }
 
+
+export async function GET(req: NextRequest) {
+  const userId = await getUserIdFromRequest(req);
+
+  const profileCheckout = await prisma.profile.findUnique({
+    where : {userId},
+    include : {
+      cartItems : true 
+    }
+});
+
+    return NextResponse.json(profileCheckout?.cartItems);
+}
+
