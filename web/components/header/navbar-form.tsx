@@ -57,6 +57,7 @@ export function NavbarDefault(){
             size="icon" 
             className="hover:bg-emerald-50 hover:text-emerald-600 h-10 w-10 shadow-sm transition-all duration-200 relative"
             aria-label="Keranjang Belanja"
+            onClick={() => router.push("/cart")}
           >
             <ShoppingCart className="h-5 w-5" />
             <div className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-600 text-white text-xs rounded-full flex items-center justify-center shadow-lg">3</div>
